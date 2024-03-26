@@ -55,9 +55,9 @@ public interface ProductGetApi {
       })
   default Flux<ResponseEntity<ProductSearchResponseCard>> getProductsByCreteria(
       @RequestParam(required = false) Map<String, Set<String>> filterCreteria) {
-    ProductSearchResponseCard mockCartResponse =
+    ProductSearchResponseCard mockProductCardResponse =
         new ProductSearchResponseCard("-1", "-1", "-1", BigInteger.valueOf(-1L), false);
-    return Flux.just(ResponseEntity.ok(mockCartResponse));
+    return Flux.just(ResponseEntity.ok(mockProductCardResponse));
   }
 
   /**
