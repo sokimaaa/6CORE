@@ -1,0 +1,26 @@
+@startuml
+'https://plantuml.com/ie-diagram
+
+entity "Audit" as a {
+    * PK: audit_id: text
+    --
+    product_id: text
+    account_id: text
+    created_at: timestamp
+    json_payload: byte[]
+}
+
+entity "AggregatedAudit" as aa {
+    * PK: aggregated_audit_id: text
+    --
+    account_id: text
+    avgProductValue: text
+    favouriteCategory: text
+    purchaseRate: float
+    --
+    * FK: audit_id: text []
+}
+
+a }|--o| aa
+
+@enduml
