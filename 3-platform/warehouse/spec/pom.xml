@@ -28,5 +28,4 @@
       <artifactId>springdoc-openapi-starter-webflux-ui</artifactId>
     </dependency>
   </dependencies>
-
 </project>
