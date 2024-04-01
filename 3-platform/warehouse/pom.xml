@@ -19,6 +19,7 @@
     <module>app</module>
     <module>domain</module>
     <module>spec</module>
+    <module>db_postgres</module>
   </modules>
 
   <properties>
