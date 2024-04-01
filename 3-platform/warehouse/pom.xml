@@ -24,7 +24,7 @@
   <dependencies>
     <dependency>
       <groupId>com.6core.lib</groupId>
-      <artifactId>logging-model</artifactId>
+      <artifactId>utils-logging</artifactId>
     </dependency>
   </dependencies>
 </project>
