@@ -21,5 +21,4 @@ COMMENT ON COLUMN public.inventories.id IS 'PK of inventory record';
 COMMENT ON COLUMN public.inventories.warehouse_id IS 'FK on warehouse record';
 COMMENT ON COLUMN public.inventories.product_id IS 'FK on product record';
 COMMENT ON COLUMN public.inventories.actual_quantity IS 'actual quantity of a product';
-COMMENT ON COLUMN public.inventories.available_quantity IS 'available quantity of a product for '
-    || 'new reservations or purchases';
+COMMENT ON COLUMN public.inventories.available_quantity IS 'available quantity of a product for new reservations or purchases';
