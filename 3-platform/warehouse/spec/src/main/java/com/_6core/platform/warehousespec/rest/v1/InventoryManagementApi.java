@@ -27,10 +27,9 @@ public interface InventoryManagementApi {
   /**
    * This API endpoint allows you to allocate a new space for the inventory in the warehouse.
    *
-   * <p>POST /warehouses/{warehouseId}/inventories/{inventoryId}
+   * <p>POST /warehouses/{warehouseId}/inventories
    *
    * @param warehouseId - required
-   * @param inventoryId - required
    * @param request - required
    * @return OK (status code 200)
    */
@@ -53,17 +52,15 @@ public interface InventoryManagementApi {
         @ApiResponse(responseCode = "500", description = "Internal server error")
       })
   @PostMapping(
-      value = "/warehouses/{warehouseId}/inventories/{inventoryId}",
+      value = "/warehouses/{warehouseId}/inventories",
       produces = "application/json",
       consumes = "application/json")
   default Mono<ResponseEntity<InventoryAllocateResponse>> inventoryAllocate(
-      @Parameter(name = "inventoryId", required = true) @PathVariable("inventoryId")
-          String inventoryId,
       @Parameter(name = "warehouseId", required = true) @PathVariable("warehouseId")
           String warehouseId,
       InventoryAllocateRequest request) {
     InventoryAllocateResponse response =
-        new InventoryAllocateResponse("-1Locate", "-1WH", "-1Inv", 3);
+        new InventoryAllocateResponse( "-1WH", "-1Inv");
     return Mono.just(ResponseEntity.ok(response));
   }
 
