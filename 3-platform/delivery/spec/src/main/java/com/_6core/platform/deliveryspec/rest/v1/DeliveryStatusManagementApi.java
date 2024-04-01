@@ -1,33 +1,21 @@
 package com._6core.platform.deliveryspec.rest.v1;
 
-import com._6core.platform.deliveryspec.rest.v1.dto.OrderStatusResponse;
-import com._6core.platform.deliveryspec.rest.v1.dto.UpdatedOrderStatusResponse;
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.Parameter;
-import io.swagger.v3.oas.annotations.media.Content;
-import io.swagger.v3.oas.annotations.media.Schema;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
-import io.swagger.v3.oas.annotations.tags.Tag;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import reactor.core.publisher.Mono;
+import com._6core.platform.deliveryspec.rest.v1.dto.DeliveryStatusResponse;
+import com._6core.platform.deliveryspec.rest.v1.dto.UpdatedDeliveryStatusResponse;
 
 @Tag(
-    name = "Delivery Sataus Management Specification",
-    description = "REST reactive specification for menegment order delivery status")
+    name = "Delivery Status Management Specification",
+    description = "REST reactive specification for menegment delivery status")
 public interface DeliveryStatusManagementApi {
 
   /**
-   * Exploring order status GET /delivery/{orderId}/status
+   * Exploring delivery status GET /delivery/{deliveryId}
    *
-   * @param orderId (required)
+   * @param deliveryIdId (required)
    * @return OK (status code 200)
    */
-  @GetMapping(value = "/delivery/{orderId}/status", produces = "application/json")
-  @Operation(summary = "Get orders status", description = "Get current order status")
+  @GetMapping(value = "/deliveries/{deliveryId}", produces = "application/json")
+  @Operation(summary = "Get delivery status", description = "Get current delivery status")
   @ApiResponses(
       value = {
         @ApiResponse(
@@ -36,30 +24,31 @@ public interface DeliveryStatusManagementApi {
             content = {
               @Content(
                   mediaType = "application/json",
-                  schema = @Schema(implementation = OrderStatusResponse.class))
+                  schema = @Schema(implementation = DeliveryStatusResponse.class))
             }),
         @ApiResponse(
             responseCode = "401",
             description = "Authorization information is missing or invalid"),
-        @ApiResponse(responseCode = "404", description = "Order not found"),
+        @ApiResponse(responseCode = "404", description = "Delivery not found"),
         @ApiResponse(responseCode = "500", description = "Unexpected error")
       })
-  default Mono<ResponseEntity<Object>> getOrderStatus(
-      @Parameter(description = "ID of the order", required = true) @PathVariable String orderId) {
-    return Mono.just(ResponseEntity.ok(new OrderStatusResponse("-1", "-1")));
+  default Mono<ResponseEntity<DeliveryStatusResponse>> getDeliveryStatus(
+      @Parameter(description = "ID of the delivery", required = true) @PathVariable
+          String deliveryId) {
+    return Mono.just(ResponseEntity.ok(new DeliveryStatusResponse("-1", "-1")));
   }
 
   /**
-   * Update order status to 'Delivering'. The delivery manager gets the order and goes to the
-   * customer. PATCH /delivery/{orderId}/status/delivering
+   * Update delivery status to 'Delivering'. The delivery manager gets the order and goes to the
+   * customer. PATCH /deliveries/{deliveryId}/delivering
    *
-   * @param orderId (required)
+   * @param deliveryId (required)
    * @return OK (status code 200)
    */
-  @PatchMapping(value = "/delivery/{orderId}/status/delivering", produces = "application/json")
+  @PatchMapping(value = "/deliveries/{deliveryId}/delivering", produces = "application/json")
   @Operation(
-      summary = "Update order status to 'delivering'",
-      description = "Update order status to 'delivering'")
+      summary = "Update delivery status to 'delivering'",
+      description = "Update delivery status to 'delivering'")
   @ApiResponses(
       value = {
         @ApiResponse(
@@ -68,29 +57,30 @@ public interface DeliveryStatusManagementApi {
             content = {
               @Content(
                   mediaType = "application/json",
-                  schema = @Schema(implementation = UpdatedOrderStatusResponse.class))
+                  schema = @Schema(implementation = UpdatedDeliveryStatusResponse.class))
             }),
         @ApiResponse(
             responseCode = "401",
             description = "Authorization information is missing or invalid"),
-        @ApiResponse(responseCode = "404", description = "Order not found"),
+        @ApiResponse(responseCode = "404", description = "Delivery not found"),
         @ApiResponse(responseCode = "500", description = "Unexpected error")
       })
-  default Mono<ResponseEntity<Object>> updateOrderStatusDelivering(
-      @Parameter(description = "ID of the order", required = true) @PathVariable String orderId) {
-    return Mono.just(ResponseEntity.ok(new UpdatedOrderStatusResponse("-1", false)));
+  default Mono<ResponseEntity<UpdatedDeliveryStatusResponse>> updateDeliveryStatusDelivering(
+      @Parameter(description = "ID of the delivery", required = true) @PathVariable
+          String deliveryId) {
+    return Mono.just(ResponseEntity.ok(new UpdatedDeliveryStatusResponse("-1", false)));
   }
 
   /**
-   * Update order status to 'Delivered' PATCH /delivery/{orderId}/status/delivered
+   * Update delivery status to 'Delivered' PATCH /deliveries/{deliveryId}/delivered
    *
-   * @param orderId (required)
+   * @param deliveryId (required)
    * @return OK (status code 200)
    */
-  @PatchMapping(value = "/delivery/{orderId}/status/delivered", produces = "application/json")
+  @PatchMapping(value = "/deliveries/{deliveryId}/delivered", produces = "application/json")
   @Operation(
-      summary = "Update order status to 'delivered'",
-      description = "Update order status to 'delivered'")
+      summary = "Update delivery status to 'delivered'",
+      description = "Update delivery status to 'delivered'")
   @ApiResponses(
       value = {
         @ApiResponse(
@@ -99,16 +89,17 @@ public interface DeliveryStatusManagementApi {
             content = {
               @Content(
                   mediaType = "application/json",
-                  schema = @Schema(implementation = UpdatedOrderStatusResponse.class))
+                  schema = @Schema(implementation = UpdatedDeliveryStatusResponse.class))
             }),
         @ApiResponse(
             responseCode = "401",
             description = "Authorization information is missing or invalid"),
-        @ApiResponse(responseCode = "404", description = "Order not found"),
+        @ApiResponse(responseCode = "404", description = "Delivery not found"),
         @ApiResponse(responseCode = "500", description = "Unexpected error")
       })
-  default Mono<ResponseEntity<Object>> updateOrderStatusDelivered(
-      @Parameter(description = "ID of the order", required = true) @PathVariable String orderId) {
-    return Mono.just(ResponseEntity.ok(new UpdatedOrderStatusResponse("-1", false)));
+  default Mono<ResponseEntity<UpdatedDeliveryStatusResponse>> updateDeliveryStatusDelivered(
+      @Parameter(description = "ID of the delivery", required = true) @PathVariable
+          String deliveryId) {
+    return Mono.just(ResponseEntity.ok(new UpdatedDeliveryStatusResponse("-1", false)));
   }
 }
