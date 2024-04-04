@@ -1,0 +1,33 @@
+@startuml
+'https://plantuml.com/ie-diagram
+
+entity "warehouses" as w {
+    * PK: id: varchar
+    --
+    * address: varchar
+}
+
+entity "products" as p {
+    * PK: id: varchar
+    --
+    * name: varchar
+    description: varchar
+    image: varchar
+    * price: bigint
+    category: varchar
+}
+
+entity "inventories" as i {
+    * PK: id: varchar
+    --
+    actual_quantity: int
+    available_quantity int
+    --
+    * FK: warehouse_id: varchar
+    FK: product_id
+}
+
+i }|--|| w
+i |o--|| p
+
+@enduml
