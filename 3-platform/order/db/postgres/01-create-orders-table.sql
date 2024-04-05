@@ -2,9 +2,9 @@
 
 CREATE TABLE IF NOT EXISTS public.orders (
     id          varchar     NOT NULL,
-    created_at  timestamp   NOT NULL,
+    created_at  timestamp   NOT NULL DEFAULT NOW(),
     total       bigint      NOT NULL,
-    status      varchar     NULL,
+    status      varchar     NOT NULL DEFAULT 'New',
     CONSTRAINT orders_pk PRIMARY KEY (id)
 );
 
@@ -22,4 +22,4 @@ COMMENT
 COMMENT
     ON COLUMN public.orders.total IS 'total price of the order';
 COMMENT
-    ON COLUMN public.orders.status IS 'order current status';
+    ON COLUMN public.orders.status IS 'order current status, at creation set to New';

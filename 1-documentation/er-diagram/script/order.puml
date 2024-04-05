@@ -14,9 +14,9 @@ entity "order_items" as ori {
 entity "orders" as or {
  * PK: id: varchar
  --
- * created_at: timestamp
+ * created_at: timestamp <<generated>>
  * total: bigint
-  status: varchar
+ * status: varchar
 }
 
 ori }|--|| or
