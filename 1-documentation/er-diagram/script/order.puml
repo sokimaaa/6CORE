@@ -1,0 +1,24 @@
+@startuml
+'https://plantuml.com/ie-diagram
+
+entity "order_items" as ori {
+ * PK: id: varchar
+ --
+ * quantity: int
+ * price: bigint
+ --
+ * FK order_id: varchar
+ * FK product_id: varchar
+}
+
+entity "orders" as or {
+ * PK: id: varchar
+ --
+ * created_at: timestamp
+ * total: bigint
+  status: varchar
+}
+
+ori }|--|| or
+
+@enduml
