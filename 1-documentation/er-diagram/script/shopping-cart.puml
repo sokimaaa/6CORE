@@ -1,0 +1,8 @@
+@startuml
+
+entity shopping_cart {
+  +String cartId() <<PK>>
+  +List<String> productIds()
+}
+
+@enduml
