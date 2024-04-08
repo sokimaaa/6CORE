@@ -1,16 +1,19 @@
 -- DROPPING TABLE IF EXISTS
-DROP TABLE IF EXISTS shopping_cart;
+-- DROP TABLE IF EXISTS shopping_carts;
 
--- CREATING TABLE "Shopping cart"
-CREATE TABLE shopping_cart (
-                               cart_id VARCHAR(255) NOT NULL,
-                               product_ids TEXT[],
-                               PRIMARY KEY (cart_id)
+-- CREATING TABLE "shopping_carts"
+CREATE TABLE IF NOT EXISTS shopping_carts
+(
+    id         VARCHAR(20) NOT NULL,
+    product_id VARCHAR(150)
 );
 
+-- SET INDEXES WHERE NEEDED
+CREATE INDEX idx_shopping_carts_id ON shopping_carts (id);
+
 -- SET COMMENT ON TABLE
-COMMENT ON TABLE shopping_cart IS 'Table containing shopping cart information';
+COMMENT ON TABLE shopping_carts IS 'Table containing shopping cart information';
 
 -- SET COMMENT ON COLUMN
-COMMENT ON COLUMN shopping_cart.cart_id IS 'The cart unique identifier';
-COMMENT ON COLUMN shopping_cart.product_ids IS 'A list of product ids that have been added to the shopping cart';
+COMMENT ON COLUMN shopping_carts.id IS 'The cart unique identifier';
+COMMENT ON COLUMN shopping_carts.product_id IS 'A list of product ids that have been added to the shopping cart';

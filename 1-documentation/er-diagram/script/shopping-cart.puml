@@ -1,8 +1,9 @@
 @startuml
+'https://plantuml.com/ie-diagram
 
 entity shopping_cart {
-  +String cartId() <<PK>>
-  +List<String> productIds()
+    + id: varchar
+    + product_id: varchar
 }
 
 @enduml
