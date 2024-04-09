@@ -1,9 +1,0 @@
-@startuml
-'https://plantuml.com/ie-diagram
-
-entity shopping_cart {
-    + id: varchar
-    + product_id: varchar
-}
-
-@enduml
