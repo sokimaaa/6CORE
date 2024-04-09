@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package com._6core.lib.proto.domain.model;
+
+option java_multiple_files = true;
+option java_package = "com._6core.lib.proto.domain.model";
+
+message ProductV01 {
+    string product_id = 1;
+    string name = 2;
+    string description = 3;
+    string image = 4;
+    repeated bytes price = 5;
+    string category = 6;
+    InventoryV01 inventory = 7;
+}
+
+message InventoryV01 {
+    string inventory_id = 1;
+    WarehouseV01 warehouse = 2;
+    ProductV01 product = 3;
+    uint32 actual_quantity = 4;
+    uint32 available_quantity = 5;
+}
+
+message WarehouseV01 {
+    string warehouse_id = 1;
+    string address = 2;
+}

@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package com._6core.lib.proto.domain.model;
+
+option java_multiple_files = true;
+option java_package = "com._6core.lib.proto.domain.model";
+
+message OrderV01 {
+    string order_id = 1;
+    string status = 2;
+    repeated bytes total = 3;
+    repeated OrderItemV01 order_items = 4;
+}
+
+message OrderV02 {
+    OrderV01 order_v01 = 1;
+    string user_id = 2;
+}
+
+message OrderItemV01 {
+    string item_id = 1;
+    string order_id = 2;
+    string product_id = 3;
+    uint32 quantity = 4;
+    repeated bytes price = 5;
+}

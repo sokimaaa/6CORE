@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package com._6core.lib.proto.domain.model;
+ 
+option java_multiple_files = true;
+option java_package = "com._6core.lib.proto.domain.model";
+
+message ShoppingCartV01 {
+    string cart_id = 1;
+    repeated string product_ids = 2;
+}
+
+message ShoppingCartV02 {
+    ShoppingCartV01 shopping_cart_v01 = 1;
+    string user_id = 2;
+}
