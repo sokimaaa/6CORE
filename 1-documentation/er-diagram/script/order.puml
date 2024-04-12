@@ -6,9 +6,9 @@ entity "order_items" as ori {
  --
  * quantity: int
  * price: bigint
+ * product_id: varchar
  --
  * FK order_id: varchar
- * FK product_id: varchar
 }
 
 entity "orders" as or {
