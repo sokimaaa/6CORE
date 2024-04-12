@@ -1,0 +1,13 @@
+${AnsiColor.BRIGHT_CYAN}
+   ____          _           
+  / __ \        | |          
+ | |  | |_ __ __| | ___ _ __ 
+ | |  | | '__/ _` |/ _ \ '__|
+ | |__| | | | (_| |  __/ |   
+  \____/|_|  \__,_|\___|_|   
+                                                    
+${AnsiColor.BLUE}   :: Java                :: ${java.version}
+${AnsiColor.BRIGHT_BLUE}   :: Spring Boot         :: ${spring-boot.version}
+${AnsiColor.CYAN}   :: Application Version :: ${application.banner.version}
+${AnsiColor.BRIGHT_CYAN}   :: Application Title   :: ${application.banner.title}
+${AnsiColor.DEFAULT}
