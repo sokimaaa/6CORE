@@ -3,7 +3,7 @@
 
 entity shopping_carts {
     * id: varchar
-    * product_id: varchar
+    * product_id: TEXT[]
 }
 
 @enduml

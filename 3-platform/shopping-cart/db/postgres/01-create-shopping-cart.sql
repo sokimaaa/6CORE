@@ -2,11 +2,11 @@
 CREATE TABLE IF NOT EXISTS shopping_carts
 (
     id         VARCHAR(20) NOT NULL,
-    product_id VARCHAR(150) NOT NULL
+    product_id TEXT[]
 );
 
 -- SET INDEXES WHERE NEEDED
-CREATE INDEX idx_shopping_carts_id ON shopping_carts (id);
+CREATE INDEX IF NOT EXISTS idx_shopping_carts_id ON shopping_carts (id);
 
 -- SET COMMENT ON TABLE
 COMMENT ON TABLE shopping_carts IS 'Table containing shopping cart information';
