@@ -39,12 +39,6 @@
   </dependencies>
 
   <build>
-    <resources>
-      <resource>
-        <filtering>true</filtering>
-        <directory>src/main/resources</directory>
-      </resource>
-    </resources>
     <plugins>
       <plugin>
         <groupId>org.springframework.boot</groupId>
@@ -65,21 +59,4 @@
     </plugins>
   </build>
 
-  <profiles>
-    <profile>
-      <id>debug</id>
-      <activation>
-        <activeByDefault>true</activeByDefault>
-      </activation>
-      <properties>
-        <spring.profiles.active>debug</spring.profiles.active>
-      </properties>
-    </profile>
-    <profile>
-      <id>cloud</id>
-      <properties>
-        <spring.profiles.active>cloud</spring.profiles.active>
-      </properties>
-    </profile>
-  </profiles>
 </project>

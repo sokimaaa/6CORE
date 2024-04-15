@@ -1,5 +1,5 @@
 ## Why do we need profiles?
-To change configuration in `.properties` files easily for different environments.
+To change configuration easily by using different `.properties` files for different environments.
 
 ## What profiles are present in application?
 At the moment there are two profiles if our application:
@@ -9,10 +9,11 @@ At the moment there are two profiles if our application:
 These profiles are situated in each service.
 
 ## How can we run application with specific profile?
-Append parameter -P`profile-name` while packaging an application.
-For example:
+1. In menu bar chose `Run` -> chose `Edit Configurations...` in dropdown menu. A `Run/Debug Configurations` window will be opened. 
+2. In `Run/Debug Configurations` window add new VM option (if `VM options` field is not visible, click 
+`Modify options` -> chose `Add VM options` in dropdown menu)
 
-```mvn clean package -Pcloud```
+`-Dspring.profiles.active={$name_profile}`, 
 
-## Default profile
-`debug` profile will be used by default if we don't specify which one to use.
+e.g. `-Dspring.profiles.active=debug` and then run an application.
+As a result a row `The following 1 profile is active:  "debug"` will be printed in console logs.
