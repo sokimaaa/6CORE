@@ -24,7 +24,7 @@ entity "inventories" as i {
     available_quantity int
     --
     * FK: warehouse_id: varchar
-    FK: product_id
+    FK: product_id: varchar
 }
 
 i }|--|| w

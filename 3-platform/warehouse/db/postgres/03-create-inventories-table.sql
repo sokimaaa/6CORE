@@ -8,8 +8,8 @@ CREATE TABLE IF NOT EXISTS public.inventories
     actual_quantity    int     NULL,
     available_quantity int     NULL,
     CONSTRAINT inventories_pk PRIMARY KEY (id),
-    CONSTRAINT inventories_warehouses_fk FOREIGN KEY (id) REFERENCES public.warehouses (id),
-    CONSTRAINT inventories_products_fk FOREIGN KEY (id) REFERENCES public.products (id)
+    CONSTRAINT inventories_warehouses_fk FOREIGN KEY (warehouse_id) REFERENCES public.warehouses (id),
+    CONSTRAINT inventories_products_fk FOREIGN KEY (product_id) REFERENCES public.products (id)
 );
 
 -- Column checks
