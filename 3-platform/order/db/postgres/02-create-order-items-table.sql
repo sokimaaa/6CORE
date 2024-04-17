@@ -7,7 +7,7 @@ CREATE TABLE IF NOT EXISTS public.order_items (
     quantity    int     NOT NULL,
     price       bigint  NOT NULL,
     CONSTRAINT order_items_pk PRIMARY KEY (id),
-    CONSTRAINT order_items_orders_fk FOREIGN KEY (id) REFERENCES public.orders (id)
+    CONSTRAINT order_items_orders_fk FOREIGN KEY (order_id) REFERENCES public.orders (id)
 );
 
 -- Column checks
