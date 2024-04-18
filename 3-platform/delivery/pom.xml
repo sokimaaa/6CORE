@@ -20,11 +20,4 @@
     <module>infra</module>
     <module>spec</module>
   </modules>
-
-  <dependencies>
-    <dependency>
-      <groupId>com.6core.lib</groupId>
-      <artifactId>6core-bom</artifactId>
-    </dependency>
-  </dependencies>
 </project>
