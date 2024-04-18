@@ -39,12 +39,6 @@
       <artifactId>mockito-junit-jupiter</artifactId>
       <version>5.2.0</version>
     </dependency>
-
-    <dependency>
-      <groupId>com._6core.lib.java</groupId>
-      <artifactId>reactive-postges-persistent</artifactId>
-      <version>0.0.1-SNAPSHOT</version>
-    </dependency>
   </dependencies>
 
 </project>
