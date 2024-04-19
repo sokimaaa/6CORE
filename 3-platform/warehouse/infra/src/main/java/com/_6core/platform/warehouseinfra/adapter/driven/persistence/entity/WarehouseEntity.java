@@ -11,7 +11,6 @@ import org.springframework.data.relational.core.mapping.Table;
 @NoArgsConstructor
 @Table(name = "warehouses")
 public class WarehouseEntity {
-    @Id
-    private Long id;
-    private String address;
+  @Id private Long id;
+  private String address;
 }
