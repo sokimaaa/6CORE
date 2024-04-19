@@ -14,8 +14,10 @@ interface GetProductPort
 note left: Defines all needed methods for getting product
 class GetProductPersistentAdapter
 note left: Implements all methods for getting product from db
+interface ProductReactiveRepository
 
 GetProductPort <|-- GetProductPersistentAdapter
+GetProductPersistentAdapter *- ProductReactiveRepository
 
 GetSingleProduct *-- GetProductPort
 GetProducts *-- GetProductPort
@@ -36,6 +38,10 @@ class GetProducts {
 
 class GetProductBy {
     - GetProductPort getProductPort
+}
+
+class GetProductPersistentAdapter {
+    - ProductReactiveRepository productReactiveRepository
 }
 
 @enduml
