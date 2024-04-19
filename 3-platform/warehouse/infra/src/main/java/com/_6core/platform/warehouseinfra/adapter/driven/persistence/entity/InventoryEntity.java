@@ -1,4 +1,4 @@
-package com._6core.platform.warehousedomain.model;
+package com._6core.platform.warehouseinfra.adapter.driven.persistence.entity;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,7 +11,7 @@ import org.springframework.data.relational.core.mapping.Table;
 @Setter
 @NoArgsConstructor
 @Table(name = "inventories")
-public class Inventory {
+public class InventoryEntity {
     @Id
     private Long id;
     @Column("actual_quantity")
