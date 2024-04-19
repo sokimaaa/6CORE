@@ -1,31 +1,22 @@
 package com._6core.platform.orderinfra.adapter.driven.persistence.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import com._6core.platform.orderdomain.model.OrderStatus;
 import java.math.BigInteger;
 import java.util.Set;
-import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
+import org.springframework.data.relational.core.mapping.Table;
 
-@Data
-@Builder
-@Entity
+@Getter
+@Setter
+@NoArgsConstructor
 @Table(name = "orders")
 public class OrderEntity {
   @Id private String id;
   private BigInteger total;
-
-  @Enumerated(value = EnumType.STRING)
   private OrderStatus status;
-
-  @OneToMany(mappedBy = "order")
-  private Set<OrderItemEntity> orderItems;
-
-  public enum OrderStatus {
-    UNDEFINED
-  }
+  @Transient private Set<OrderItemEntity> orderItems;
 }

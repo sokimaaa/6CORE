@@ -38,11 +38,6 @@
       <artifactId>reactive-postges-persistent</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.hibernate.reactive</groupId>
-      <artifactId>hibernate-reactive-core</artifactId>
-      <version>2.2.2.Final</version>
-    </dependency>
-    <dependency>
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
       <scope>provided</scope>
