@@ -1,0 +1,41 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+interface GetProductUseCase
+class GetSingleProduct
+class GetProducts
+class GetProductBy
+
+GetProductUseCase <|-- GetSingleProduct
+GetProductUseCase <|-- GetProducts
+GetProductUseCase <|-- GetProductBy
+
+interface GetProductPort
+note left: Defines all needed methods for getting product
+class GetProductPersistentAdapter
+note left: Implements all methods for getting product from db
+
+GetProductPort <|-- GetProductPersistentAdapter
+
+GetSingleProduct *-- GetProductPort
+GetProducts *-- GetProductPort
+GetProductBy *-- GetProductPort
+
+interface GetProductUseCase<ID> {
+    + Flux<GetProductResponse> getProduct(ID identifier)
+    + String case()
+}
+
+class GetSingleProduct {
+    - GetProductPort getProductPort
+}
+
+class GetProducts {
+    - GetProductPort getProductPort
+}
+
+class GetProductBy {
+    - GetProductPort getProductPort
+}
+
+@enduml
