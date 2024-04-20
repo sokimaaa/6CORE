@@ -70,7 +70,7 @@
 
             <dependency>
                 <groupId>com.6core.lib</groupId>
-                <artifactId>unit-test-bundle</artifactId>
+                <artifactId>reactive-postges-persistent</artifactId>
                 <version>0.0.1-SNAPSHOT</version>
             </dependency>
 
