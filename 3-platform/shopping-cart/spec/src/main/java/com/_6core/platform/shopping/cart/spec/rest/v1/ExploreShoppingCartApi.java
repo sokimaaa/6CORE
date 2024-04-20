@@ -44,10 +44,10 @@ public interface ExploreShoppingCartApi {
       })
   @GetMapping(value = "carts/{cartId}/items", produces = "application/json")
   default Mono<ResponseEntity<GetShoppingCartItemsResponse>> show(
-      @Parameter(name = "cartId", required = true) @PathVariable("cartId") final Long cartId,
+      @Parameter(name = "cartId", required = true) @PathVariable("cartId") final String cartId,
       @Parameter(hidden = true) final ServerWebExchange serverWebExchange) {
     final var getItemsResponse =
-        new GetShoppingCartItemsResponse(-1L, Collections.emptyList(), Boolean.FALSE);
+        new GetShoppingCartItemsResponse("-1", Collections.emptyList(), Boolean.FALSE);
     return Mono.just(ResponseEntity.ok(getItemsResponse));
   }
 }
