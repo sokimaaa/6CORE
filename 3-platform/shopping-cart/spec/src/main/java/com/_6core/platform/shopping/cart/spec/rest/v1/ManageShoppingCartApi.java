@@ -51,11 +51,11 @@ public interface ManageShoppingCartApi {
       produces = "application/json",
       consumes = "application/json")
   default Mono<ResponseEntity<PutShoppingCartItemResponse>> put(
-      @Parameter(name = "cartId", required = true) @PathVariable("cartId") final Long cartId,
+      @Parameter(name = "cartId", required = true) @PathVariable("cartId") final String cartId,
       @Parameter(name = "cartPuttingRequest", required = true) @Valid @RequestBody
           PutShoppingCartItemRequest putRequest,
       @Parameter(hidden = true) final ServerWebExchange serverWebExchange) {
-    final var putResponse = new PutShoppingCartItemResponse(-1L, -1L, Boolean.FALSE);
+    final var putResponse = new PutShoppingCartItemResponse("-1", "-1", Boolean.FALSE);
     return Mono.just(ResponseEntity.ok(putResponse));
   }
 }

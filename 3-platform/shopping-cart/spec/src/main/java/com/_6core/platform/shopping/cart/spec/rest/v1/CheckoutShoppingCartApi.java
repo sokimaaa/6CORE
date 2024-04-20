@@ -51,12 +51,12 @@ public interface CheckoutShoppingCartApi {
       produces = "application/json",
       consumes = "application/json")
   default Mono<ResponseEntity<CheckoutShoppingCartResponse>> checkout(
-      @Parameter(name = "cartId", required = true) @PathVariable("cartId") final Long cartId,
+      @Parameter(name = "cartId", required = true) @PathVariable("cartId") final String cartId,
       @Parameter(name = "cartCheckoutRequest", required = true) @Valid @RequestBody
           final CheckoutShoppingCartRequest checkoutRequest,
       @Parameter(hidden = true) final ServerWebExchange serverWebExchange) {
     final var cartCheckoutResponseMock =
-        new CheckoutShoppingCartResponse(-1L, -1L, -1L, Boolean.FALSE);
+        new CheckoutShoppingCartResponse("-1", "-1", "-1", Boolean.FALSE);
     return Mono.just(ResponseEntity.ok(cartCheckoutResponseMock));
   }
 }
