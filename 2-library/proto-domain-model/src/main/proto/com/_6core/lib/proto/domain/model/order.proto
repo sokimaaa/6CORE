@@ -24,3 +24,16 @@ message OrderItemV01 {
     uint32 quantity = 4;
     repeated bytes price = 5;
 }
+
+message CreateOrderRequest {
+    repeated string product_id = 1;
+}
+
+message CreateOrderResponse {
+    bool is_ok = 1;
+    string message = 2;
+}
+
+service OrderApi {
+    rpc createOrder(stream CreateOrderRequest) returns (CreateOrderResponse) {}
+}
