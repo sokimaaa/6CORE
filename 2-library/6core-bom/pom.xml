@@ -69,7 +69,7 @@
             </dependency>
 
             <dependency>
-                <groupId>com.6core.lib</groupId>
+                <groupId>com.6core.lib.java</groupId>
                 <artifactId>reactive-postges-persistent</artifactId>
                 <version>0.0.1-SNAPSHOT</version>
             </dependency>
