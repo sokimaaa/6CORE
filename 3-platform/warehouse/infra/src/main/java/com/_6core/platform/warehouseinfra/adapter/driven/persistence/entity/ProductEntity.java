@@ -10,7 +10,7 @@ import org.springframework.data.relational.core.mapping.Table;
 @NoArgsConstructor
 @Table(name = "products")
 public class ProductEntity {
-  @Id private Long id;
+  @Id private String id;
   private String name;
   private String description;
   private String image;

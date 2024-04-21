@@ -11,7 +11,7 @@ import org.springframework.data.relational.core.mapping.Table;
 @NoArgsConstructor
 @Table(name = "inventories")
 public class InventoryEntity {
-  @Id private Long id;
+  @Id private String id;
 
   @Column("actual_quantity")
   private Integer actualQuantity;
