@@ -11,7 +11,6 @@ import org.springframework.data.relational.core.mapping.Table;
 @AllArgsConstructor
 @Table(name = "shopping_carts")
 public class ShoppingCart {
-    @Id
-    private String id;
-    private String[] productIds;
+  @Id private String id;
+  private String[] productIds;
 }
