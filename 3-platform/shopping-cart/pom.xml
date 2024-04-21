@@ -21,4 +21,15 @@
     <module>spec</module>
   </modules>
 
+  <dependencies>
+    <dependency>
+      <groupId>com._6core.lib.java</groupId>
+      <artifactId>reactive-postges-persistent</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+    </dependency>
+  </dependencies>
 </project>
