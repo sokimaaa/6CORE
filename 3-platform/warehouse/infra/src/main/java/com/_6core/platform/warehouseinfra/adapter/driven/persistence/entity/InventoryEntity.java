@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 
@@ -21,15 +22,9 @@ public class InventoryEntity {
   @Column("available_quantity")
   private Integer availableQuantity;
 
+  @Transient
   private WarehouseEntity warehouse;
 
+  @Transient
   private ProductEntity product;
-
-  public Optional<WarehouseEntity> getWarehouse() {
-    return Optional.ofNullable(this.warehouse);
-  }
-
-  public Optional<ProductEntity> getProduct() {
-    return Optional.ofNullable(this.product);
-  }
 }
