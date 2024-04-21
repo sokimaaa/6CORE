@@ -1,6 +1,5 @@
 package com._6core.platform.warehouseinfra.adapter.driven.persistence.entity;
 
-import java.util.Optional;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -22,9 +21,7 @@ public class InventoryEntity {
   @Column("available_quantity")
   private Integer availableQuantity;
 
-  @Transient
-  private WarehouseEntity warehouse;
+  @Transient private WarehouseEntity warehouse;
 
-  @Transient
-  private ProductEntity product;
+  @Transient private ProductEntity product;
 }
