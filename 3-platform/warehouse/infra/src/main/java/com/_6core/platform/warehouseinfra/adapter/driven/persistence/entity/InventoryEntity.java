@@ -1,16 +1,13 @@
 package com._6core.platform.warehouseinfra.adapter.driven.persistence.entity;
 
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
+import java.util.Optional;
 
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @Table(name = "inventories")
 public class InventoryEntity {
@@ -22,11 +19,16 @@ public class InventoryEntity {
   @Column("available_quantity")
   private Integer availableQuantity;
 
-  @OneToOne
-  @JoinColumn(name = "warehouse_id", nullable = false)
   private WarehouseEntity warehouse;
 
-  @OneToOne
-  @JoinColumn(name = "product_id", nullable = false)
   private ProductEntity product;
+
+  public Optional<WarehouseEntity> getWarehouse() {
+    return Optional.ofNullable(this.warehouse);
+  }
+
+  public Optional<ProductEntity> getProduct() {
+    return Optional.ofNullable(this.product);
+  }
+
 }
