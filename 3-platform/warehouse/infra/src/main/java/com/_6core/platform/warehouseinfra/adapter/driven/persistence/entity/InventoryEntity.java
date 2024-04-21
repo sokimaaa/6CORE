@@ -1,5 +1,7 @@
 package com._6core.platform.warehouseinfra.adapter.driven.persistence.entity;
 
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -15,14 +17,16 @@ public class InventoryEntity {
   @Id private Long id;
 
   @Column("actual_quantity")
-  private int actualQuantity;
+  private Integer actualQuantity;
 
   @Column("available_quantity")
-  private int availableQuantity;
+  private Integer availableQuantity;
 
-  @Column("warehouse_id")
-  private String warehouseId;
+  @OneToOne
+  @JoinColumn(name = "warehouse_id", nullable = false)
+  private WarehouseEntity warehouse;
 
-  @Column("product_id")
-  private String productId;
+  @OneToOne
+  @JoinColumn(name = "product_id", nullable = false)
+  private ProductEntity product;
 }
