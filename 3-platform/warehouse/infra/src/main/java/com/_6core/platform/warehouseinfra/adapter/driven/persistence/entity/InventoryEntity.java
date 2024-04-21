@@ -1,11 +1,11 @@
 package com._6core.platform.warehouseinfra.adapter.driven.persistence.entity;
 
+import java.util.Optional;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
-import java.util.Optional;
 
 @Data
 @NoArgsConstructor
@@ -30,5 +30,4 @@ public class InventoryEntity {
   public Optional<ProductEntity> getProduct() {
     return Optional.ofNullable(this.product);
   }
-
 }
