@@ -19,6 +19,7 @@
     <module>infra</module>
     <module>app</module>
     <module>domain</module>
+    <module>spec</module>
   </modules>
 
   <properties>
