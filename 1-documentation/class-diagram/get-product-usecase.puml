@@ -11,10 +11,11 @@ GetProductUseCase <|-- GetProducts
 GetProductUseCase <|-- GetProductBy
 
 interface GetProductPort
-note left: Defines all needed methods for getting product
+note left: Defines all needed methods for getting product\nCould be complex methods that involves a few step\nFor example, FindById + Mapping to Domain Dto
 class GetProductPersistentAdapter
-note left: Implements all methods for getting product from db
+note left: Implements all methods for getting product from db\nUtilizes needed Repositories
 interface ProductReactiveRepository
+note top: Defines and Implements CRUD methods\nFor example, findByName, findByIdEqualsIgnoreCaseAndContains
 
 GetProductPort <|-- GetProductPersistentAdapter
 GetProductPersistentAdapter *- ProductReactiveRepository
