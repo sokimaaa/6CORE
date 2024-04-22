@@ -54,5 +54,6 @@ class DomainMapper
 class EntityMapper
 class RequestMapper
 class ResponseMapper
+class ProtoMapper
 
 @enduml
