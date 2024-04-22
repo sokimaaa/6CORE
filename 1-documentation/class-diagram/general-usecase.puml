@@ -34,8 +34,12 @@ Case_1 *-- DoDomainPersistentPort
 Case_1 *-- DoDomainGrpcPort
 Case_1 *-- DoDomainService
 
-class DoDomainPersistentAdapter
-class DoDomainGrpcAdapter
+class DoDomainPersistentAdapter {
+    - DomainR2dbcRepository
+}
+class DoDomainGrpcAdapter {
+    - GrpcStub
+}
 
 DoDomainPersistentPort <|-- DoDomainPersistentAdapter
 DoDomainGrpcPort <|-- DoDomainGrpcAdapter
