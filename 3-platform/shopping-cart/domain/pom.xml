@@ -16,5 +16,9 @@
       <artifactId>shopping-cart-spec</artifactId>
       <version>${project.parent.version}</version>
     </dependency>
+    <dependency>
+      <groupId>com.6core.lib</groupId>
+      <artifactId>java-domain-model</artifactId>
+    </dependency>
   </dependencies>
 </project>

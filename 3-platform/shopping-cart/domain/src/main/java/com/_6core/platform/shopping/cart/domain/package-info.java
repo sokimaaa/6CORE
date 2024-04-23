@@ -1,1 +1,1 @@
-package com._6core.platform.shopping.cart.app;
+package com._6core.platform.shopping.cart.domain;
