@@ -21,9 +21,5 @@
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-webflux</artifactId>
     </dependency>
-        <dependency>
-            <groupId>com.6core.lib</groupId>
-            <artifactId>proto-domain-model</artifactId>
-        </dependency>
   </dependencies>
 </project>
