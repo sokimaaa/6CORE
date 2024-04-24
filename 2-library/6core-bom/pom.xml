@@ -93,11 +93,6 @@
             </dependency>
 
             <!--  junit dependencies  -->
-            <dependency>
-                <groupId>com.6core.lib</groupId>
-                <artifactId>unit-test-bundle</artifactId>
-                <version>0.0.1-SNAPSHOT</version>
-            </dependency>
         </dependencies>
     </dependencyManagement>
 
