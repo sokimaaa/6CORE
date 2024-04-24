@@ -15,6 +15,7 @@
       <groupId>com.6core.platform</groupId>
       <artifactId>shopping-cart-spec</artifactId>
       <version>${project.parent.version}</version>
+      <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>com.6core.lib</groupId>
