@@ -1,4 +1,4 @@
-package com._6core.platform.orderinfra.adapter.driven.persistence;
+package com._6core.platform.orderinfra.adapter.driver.sevice;
 
 import com._6core.lib.java.domain.model.order.immutable.ImmutableOrderV01Impl;
 import com._6core.platform.orderdomain.model.PaymentStatus;
