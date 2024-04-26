@@ -1,0 +1,59 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+interface UseCase
+class Case_1
+class Case_2
+
+UseCase <|-- Case_1
+UseCase <|-- Case_2
+
+interface UseCase<IN, OUT> {
+    + OUT doUseCase(IN)
+}
+
+class Case_1 {
+    - DoDomainPersistentPort
+    - DoDomainGrpcPort
+    - DoDomainService
+}
+
+interface DoDomainPersistentPort<DOMAIN> {
+    + DOMAIN doPersist(DOMAIN)
+}
+
+interface DoDomainGrpcPort<DOMAIN> {
+    + DOMAIN doGrpc(DOMAIN)
+}
+
+class DoDomainService<DOMAIN> {
+    + DOMAIN doService(DOMAIN)
+}
+
+Case_1 *-- DoDomainPersistentPort
+Case_1 *-- DoDomainGrpcPort
+Case_1 *-- DoDomainService
+
+class DoDomainPersistentAdapter {
+    - DomainR2dbcRepository
+}
+class DoDomainGrpcAdapter {
+    - GrpcStub
+}
+
+DoDomainPersistentPort <|-- DoDomainPersistentAdapter
+DoDomainGrpcPort <|-- DoDomainGrpcAdapter
+
+interface DomainR2dbcRepository
+DoDomainPersistentAdapter *-- DomainR2dbcRepository
+
+class GrpcStub
+DoDomainGrpcAdapter *-- GrpcStub
+
+class DomainMapper
+class EntityMapper
+class RequestMapper
+class ResponseMapper
+class ProtoMapper
+
+@enduml

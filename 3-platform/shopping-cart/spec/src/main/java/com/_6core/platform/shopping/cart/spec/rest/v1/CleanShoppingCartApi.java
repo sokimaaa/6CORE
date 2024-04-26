@@ -54,10 +54,10 @@ public interface CleanShoppingCartApi {
       produces = "application/json",
       consumes = "application/json")
   default Mono<ResponseEntity<CleanShoppingCartResponse>> clean(
-      @Parameter(name = "cartId", required = true) @PathVariable("cartId") final Long cartId,
+      @Parameter(name = "cartId", required = true) @PathVariable("cartId") final String cartId,
       @Parameter(hidden = true) final ServerWebExchange serverWebExchange) {
     final var cleanResponse =
-        new CleanShoppingCartResponse(-1L, Collections.emptyList(), Boolean.FALSE);
+        new CleanShoppingCartResponse("-1", Collections.emptyList(), Boolean.FALSE);
     return Mono.just(ResponseEntity.ok(cleanResponse));
   }
 
@@ -97,11 +97,11 @@ public interface CleanShoppingCartApi {
       produces = "application/json",
       consumes = "application/json")
   default Mono<ResponseEntity<CleanShoppingCartResponse>> clean(
-      @Parameter(name = "cartId", required = true) @PathVariable("cartId") final Long cartId,
-      @Parameter(name = "itemId", required = true) @PathVariable("itemId") final Long itemId,
+      @Parameter(name = "cartId", required = true) @PathVariable("cartId") final String cartId,
+      @Parameter(name = "itemId", required = true) @PathVariable("itemId") final String itemId,
       @Parameter(hidden = true) final ServerWebExchange serverWebExchange) {
     final var cleanResponse =
-        new CleanShoppingCartResponse(-1L, Collections.singletonList(itemId), Boolean.FALSE);
+        new CleanShoppingCartResponse("-1", Collections.singletonList(itemId), Boolean.FALSE);
     return Mono.just(ResponseEntity.ok(cleanResponse));
   }
 }
