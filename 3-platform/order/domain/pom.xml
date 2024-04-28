@@ -48,6 +48,20 @@
       <groupId>com.6core.lib</groupId>
       <artifactId>java-domain-model</artifactId>
     </dependency>
+    <dependency>
+      <groupId>com.6core.lib</groupId>
+      <artifactId>proto-domain-model</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.mapstruct</groupId>
+      <artifactId>mapstruct</artifactId>
+      <version>1.6.0.Beta1</version>
+      <scope>compile</scope>
+    </dependency>
   </dependencies>
 
 </project>
