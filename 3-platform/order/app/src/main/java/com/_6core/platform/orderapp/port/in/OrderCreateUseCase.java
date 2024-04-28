@@ -5,5 +5,5 @@ import com._6core.platform.orderspec.rest.v1.dto.OrderDetailsResponse;
 import reactor.core.publisher.Mono;
 
 public interface OrderCreateUseCase {
-    public  Mono<OrderDetailsResponse> createOrder(OrderRequest request);
+  public Mono<OrderDetailsResponse> createOrder(OrderRequest request);
 }

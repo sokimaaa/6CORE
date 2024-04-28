@@ -4,5 +4,5 @@ import com._6core.platform.orderdomain.model.OrderStatus;
 import reactor.core.publisher.Mono;
 
 public interface DeliveryEventPort {
-    Mono<OrderStatus> sendNotification();
+  Mono<OrderStatus> sendNotification();
 }

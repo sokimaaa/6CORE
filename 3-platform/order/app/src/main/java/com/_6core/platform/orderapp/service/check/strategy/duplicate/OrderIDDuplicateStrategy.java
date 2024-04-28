@@ -5,14 +5,14 @@ import com._6core.platform.orderdomain.model.OrderRequest;
 import com._6core.platform.orderdomain.service.duplicate.strategy.OrderDuplicateStrategy;
 
 public class OrderIDDuplicateStrategy implements OrderDuplicateStrategy<OrderRequest> {
-    private final OrderRepository orderRepository;
+  private final OrderRepository orderRepository;
 
-    public OrderIDDuplicateStrategy(OrderRepository orderRepository) {
-        this.orderRepository = orderRepository;
-    }
+  public OrderIDDuplicateStrategy(OrderRepository orderRepository) {
+    this.orderRepository = orderRepository;
+  }
 
-    @Override
-    public boolean isDuplicate(OrderRequest request) {
-        return orderRepository.getOrderById(request.orderId()) != null;
-    }
+  @Override
+  public boolean isDuplicate(OrderRequest request) {
+    return orderRepository.getOrderById(request.orderId()) != null;
+  }
 }

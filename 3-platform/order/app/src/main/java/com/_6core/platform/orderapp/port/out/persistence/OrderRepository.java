@@ -6,7 +6,9 @@ import reactor.core.publisher.Mono;
 
 public interface OrderRepository {
 
-        void save(ImmutableOrderV01Impl order);
-        Mono<OrderDetailsResponse> getOrderById(String orderId);
-        Mono<OrderDetailsResponse> getOrderByUserId(String userId);
+  void save(ImmutableOrderV01Impl order);
+
+  Mono<OrderDetailsResponse> getOrderById(String orderId);
+
+  Mono<OrderDetailsResponse> getOrderByUserId(String userId);
 }
