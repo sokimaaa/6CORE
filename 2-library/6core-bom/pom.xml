@@ -9,136 +9,141 @@
 
   <modules></modules>
 
-    <properties>
-        <!--  General Purpose Properties  -->
-        <java.version>17</java.version>
-        <maven.compiler.source>17</maven.compiler.source>
-        <maven.compiler.target>17</maven.compiler.target>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  <properties>
+    <!--  General Purpose Properties  -->
+    <java.version>17</java.version>
+    <maven.compiler.source>17</maven.compiler.source>
+    <maven.compiler.target>17</maven.compiler.target>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-        <!--  Framework Properties  -->
-        <grpc.version.fwk.version>1.53.0</grpc.version.fwk.version>
+    <!--  Framework Properties  -->
+    <grpc.version.fwk.version>1.53.0</grpc.version.fwk.version>
 
-        <!-- Plugin Properties  -->
-        <maven.compiler.plugin.version>3.8.1</maven.compiler.plugin.version>
-        <spotless.check.plugin.version>2.43.0</spotless.check.plugin.version>
-    </properties>
+    <!-- Plugin Properties  -->
+    <maven.compiler.plugin.version>3.8.1</maven.compiler.plugin.version>
+    <spotless.check.plugin.version>2.43.0</spotless.check.plugin.version>
+  </properties>
 
-    <dependencyManagement>
-        <dependencies>
-            <!--  external libs dependencies  -->
-            <dependency>
-                <groupId>io.grpc</groupId>
-                <artifactId>grpc-bom</artifactId>
-                <version>${grpc.version.fwk.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
+  <dependencyManagement>
+    <dependencies>
+      <!--  external libs dependencies  -->
+      <dependency>
+        <groupId>io.grpc</groupId>
+        <artifactId>grpc-bom</artifactId>
+        <version>${grpc.version.fwk.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
 
-            <!--  6core lib dependencies  -->
-            <dependency>
-                <groupId>com.6core.lib</groupId>
-                <artifactId>java-domain-model</artifactId>
-                <version>0.0.1-SNAPSHOT</version>
-            </dependency>
-            <dependency>
-                <groupId>com.6core.lib</groupId>
-                <artifactId>hexagonal-annotations</artifactId>
-                <version>0.0.1-SNAPSHOT</version>
-            </dependency>
+      <!--  6core lib dependencies  -->
+      <dependency>
+        <groupId>com.6core.lib</groupId>
+        <artifactId>java-domain-model</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>com.6core.lib</groupId>
+        <artifactId>hexagonal-annotations</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+      </dependency>
 
-            <dependency>
-                <groupId>com.6core.lib</groupId>
-                <artifactId>utils-logging</artifactId>
-                <version>0.0.1-SNAPSHOT</version>
-            </dependency>
+      <dependency>
+        <groupId>com.6core.lib</groupId>
+        <artifactId>utils-logging</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+      </dependency>
 
-            <dependency>
-                <groupId>com.6core.lib</groupId>
-                <artifactId>grpc-client-starter</artifactId>
-                <version>0.0.1-SNAPSHOT</version>
-            </dependency>
+      <dependency>
+        <groupId>com.6core.lib</groupId>
+        <artifactId>grpc-client-starter</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+      </dependency>
 
-            <dependency>
-                <groupId>com.6core.lib</groupId>
-                <artifactId>grpc-server-starter</artifactId>
-                <version>0.0.1-SNAPSHOT</version>
-            </dependency>
+      <dependency>
+        <groupId>com.6core.lib</groupId>
+        <artifactId>grpc-server-starter</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+      </dependency>
 
-            <dependency>
-                <groupId>com.6core.lib</groupId>
-                <artifactId>reactive-postges-persistent</artifactId>
-                <version>0.0.1-SNAPSHOT</version>
-            </dependency>
+      <dependency>
+        <groupId>com.6core.lib</groupId>
+        <artifactId>reactive-postges-persistent</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+      </dependency>
 
-            <dependency>
-                <groupId>com.6core.lib</groupId>
-                <artifactId>proto-domain-model</artifactId>
-                <version>0.0.1-SNAPSHOT</version>
-            </dependency>
+      <dependency>
+        <groupId>com.6core.lib</groupId>
+        <artifactId>proto-domain-model</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+      </dependency>
 
-            <!--  spring dependencies  -->
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-dependencies</artifactId>
-                <version>3.1.5</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
+      <!--  spring dependencies  -->
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-dependencies</artifactId>
+        <version>3.1.5</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
 
-            <dependency>
-                <groupId>org.springdoc</groupId>
-                <artifactId>springdoc-openapi</artifactId>
-                <version>2.3.0</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
+      <dependency>
+        <groupId>org.springdoc</groupId>
+        <artifactId>springdoc-openapi</artifactId>
+        <version>2.3.0</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
 
-            <!--  junit dependencies  -->  
-        </dependencies>
-    </dependencyManagement>
+      <!--  junit dependencies  -->
+      <dependency>
+        <groupId>com.6core.lib</groupId>
+        <artifactId>unit-test-bundle</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
 
-    <build>
-        <pluginManagement>
-            <plugins>
-                <!-- Compilation  -->
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-compiler-plugin</artifactId>
-                    <version>${maven.compiler.plugin.version}</version>
-                </plugin>
+  <build>
+    <pluginManagement>
+      <plugins>
+        <!-- Compilation  -->
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>${maven.compiler.plugin.version}</version>
+        </plugin>
 
-                <!-- Spotless -->
-                <plugin>
-                    <groupId>com.diffplug.spotless</groupId>
-                    <artifactId>spotless-maven-plugin</artifactId>
-                    <version>${spotless.check.plugin.version}</version>
-                    <configuration>
-                        <java>
-                            <includes>
-                                <include>src/main/java/**/*.java</include>
-                                <include>src/test/java/**/*.java</include>
-                            </includes>
-                            <googleJavaFormat/>
-                            <formatAnnotations/>
-                        </java>
-                        <pom>
-                            <includes>
-                                <include>**/pom.xml</include>
-                            </includes>
-                            <sortPom/>
-                        </pom>
-                    </configuration>
-                    <executions>
-                        <execution>
-                            <goals>
-                                <goal>check</goal>
-                            </goals>
-                        </execution>
-                    </executions>
-                </plugin>
-            </plugins>
-        </pluginManagement>
-    </build>
+        <!-- Spotless -->
+        <plugin>
+          <groupId>com.diffplug.spotless</groupId>
+          <artifactId>spotless-maven-plugin</artifactId>
+          <version>${spotless.check.plugin.version}</version>
+          <configuration>
+            <java>
+              <includes>
+                <include>src/main/java/**/*.java</include>
+                <include>src/test/java/**/*.java</include>
+              </includes>
+              <googleJavaFormat></googleJavaFormat>
+              <formatAnnotations></formatAnnotations>
+            </java>
+            <pom>
+              <includes>
+                <include>**/pom.xml</include>
+              </includes>
+              <sortPom></sortPom>
+            </pom>
+          </configuration>
+          <executions>
+            <execution>
+              <goals>
+                <goal>check</goal>
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
 
 </project>
