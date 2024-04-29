@@ -21,4 +21,10 @@
     <module>spec</module>
   </modules>
 
+  <dependencies>
+    <dependency>
+      <groupId>com.6core.lib</groupId>
+      <artifactId>unit-test-bundle</artifactId>
+    </dependency>
+  </dependencies>
 </project>
