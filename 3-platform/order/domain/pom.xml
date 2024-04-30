@@ -40,6 +40,16 @@
       <version>5.2.0</version>
     </dependency>
     <dependency>
+      <groupId>com.6core.lib</groupId>
+      <artifactId>unit-test-bundle</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.projectreactor</groupId>
+      <artifactId>reactor-test</artifactId>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
       <groupId>com.6core.platform</groupId>
       <artifactId>order-spec</artifactId>
       <version>0.0.1-SNAPSHOT</version>
