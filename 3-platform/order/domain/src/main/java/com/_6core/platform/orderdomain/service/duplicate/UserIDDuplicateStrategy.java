@@ -1,8 +1,7 @@
 package com._6core.platform.orderdomain.service.duplicate;
 
-import com._6core.lib.java.domain.model.order.OrderV01;
-import com._6core.platform.orderdomain.service.helper.OrderHelperService;
 import com._6core.platform.orderdomain.model.OrderRequest;
+import com._6core.platform.orderdomain.service.helper.OrderHelperService;
 import reactor.core.publisher.Mono;
 
 public class UserIDDuplicateStrategy implements OrderDuplicateStrategy<OrderRequest> {

@@ -10,11 +10,10 @@ import com._6core.platform.orderdomain.service.correctness.OrderCorrectnessConte
 import com._6core.platform.orderdomain.service.correctness.OrderCorrectnessStrategy;
 import com._6core.platform.orderdomain.service.duplicate.OrderDuplicateContext;
 import com._6core.platform.orderdomain.service.duplicate.OrderDuplicateStrategy;
-import lombok.RequiredArgsConstructor;
-import reactor.core.publisher.Mono;
-
 import java.util.ArrayList;
 import java.util.List;
+import lombok.RequiredArgsConstructor;
+import reactor.core.publisher.Mono;
 
 @RequiredArgsConstructor
 public class OrderCreateService implements OrderCreateUseCase {
@@ -25,7 +24,8 @@ public class OrderCreateService implements OrderCreateUseCase {
   private final OrderCorrectnessStrategy<OrderRequest> orderItemsCorrect;
   private final OrderCorrectnessContext<OrderRequest> correctnessContext;
   private final OrderRepository orderRepository;
-  private final OrderMapper mapper;;
+  private final OrderMapper mapper;
+  ;
 
   @Override
   public Mono<OrderV01> createOrder(Order protoRequest) {
