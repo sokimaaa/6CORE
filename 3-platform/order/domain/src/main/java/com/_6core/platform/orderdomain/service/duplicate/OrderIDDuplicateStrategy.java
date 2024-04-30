@@ -13,8 +13,7 @@ public class OrderIDDuplicateStrategy implements OrderDuplicateStrategy<OrderReq
   }
 
   @Override
-  public boolean isDuplicate(OrderRequest request) {
-    Mono<OrderV01> orderById = orderHelper.getOrderById(request.orderId());
-      return Boolean.TRUE.equals(orderById.hasElement().block());
+  public Mono<Boolean> isDuplicate(OrderRequest request) {
+      return orderHelper.getOrderById(request.orderId()).hasElement();
   }
 }

@@ -1,8 +1,10 @@
 package com._6core.platform.orderapp.service;
 
 import com._6core.lib.java.domain.model.order.OrderV01;
+import com._6core.lib.proto.domain.model.Order;
 import com._6core.platform.orderapp.port.in.OrderCreateUseCase;
 import com._6core.platform.orderapp.port.out.persistence.OrderRepository;
+import com._6core.platform.orderdomain.mapper.OrderMapper;
 import com._6core.platform.orderdomain.model.OrderRequest;
 import com._6core.platform.orderdomain.service.correctness.OrderCorrectnessContext;
 import com._6core.platform.orderdomain.service.correctness.OrderCorrectnessStrategy;
@@ -22,9 +24,13 @@ public class OrderCreateService implements OrderCreateUseCase {
   private final OrderCorrectnessStrategy<OrderRequest> orderItemsCorrect;
   private final OrderCorrectnessContext<OrderRequest> correctnessContext;
   private final OrderRepository orderRepository;
+  private final OrderMapper mapper;;
 
   @Override
-  public Mono<OrderV01> createOrder(OrderRequest request) {
+  public Mono<OrderV01> createOrder(Order protoRequest) {
+
+    OrderV01 order = mapper.mapToOrderV01(protoRequest);
+    OrderRequest request = mapper.mapToOrderRequest(order);
 
     if (orderDuplicateChecker(request)) {
       return Mono.error(new RuntimeException("Order is a duplicate"));
@@ -33,7 +39,7 @@ public class OrderCreateService implements OrderCreateUseCase {
       return Mono.error(new RuntimeException("Invalid order data"));
     }
 
-    return orderRepository.createOrder(request);
+    return orderRepository.createOrder(protoRequest);
   }
 
   public boolean orderDuplicateChecker(OrderRequest request) {
@@ -43,9 +49,8 @@ public class OrderCreateService implements OrderCreateUseCase {
 
     for (OrderDuplicateStrategy<OrderRequest> strategy : strategies) {
       duplicateContext.setStrategy(strategy);
-      Mono<Boolean> resultMono = duplicateContext.executeStrategy(request);
-      boolean result = Boolean.TRUE.equals(resultMono.block());
-      if (result) {
+      Mono<Boolean> booleanMono = duplicateContext.executeStrategy(request);
+      if (Boolean.TRUE.equals(booleanMono.block())) {
         return true;
       }
     }

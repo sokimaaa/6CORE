@@ -9,7 +9,7 @@ public class OrderDuplicateContext<T> {
     this.strategy = strategy;
   }
 
-  public boolean executeStrategy(T request) {
+  public Mono<Boolean> executeStrategy(T request) {
     return strategy.isDuplicate(request);
   }
 }
