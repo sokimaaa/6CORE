@@ -16,6 +16,22 @@
       <artifactId>warehouse-spec</artifactId>
       <version>0.0.1-SNAPSHOT</version>
     </dependency>
+    <dependency>
+      <groupId>com.6core.lib</groupId>
+      <artifactId>java-domain-model</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.mapstruct</groupId>
+      <artifactId>mapstruct</artifactId>
+      <version>1.6.0.Beta1</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.6core.platform</groupId>
+      <artifactId>warehouse-infra</artifactId>
+      <version>0.0.1-SNAPSHOT</version>
+      <scope>compile</scope>
+    </dependency>
   </dependencies>
 
 </project>
