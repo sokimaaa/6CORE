@@ -1,5 +1,6 @@
 package com._6core.platform.orderapp.service;
 
+import com._6core.lib.java.domain.model.order.OrderV01;
 import com._6core.platform.orderapp.port.in.OrderCreateUseCase;
 import com._6core.platform.orderapp.port.out.persistence.OrderRepository;
 import com._6core.platform.orderdomain.model.OrderRequest;
@@ -7,7 +8,6 @@ import com._6core.platform.orderdomain.service.correctness.strategy.OrderCorrect
 import com._6core.platform.orderdomain.service.correctness.strategy.OrderCorrectnessStrategy;
 import com._6core.platform.orderdomain.service.duplicate.strategy.OrderDuplicateContext;
 import com._6core.platform.orderdomain.service.duplicate.strategy.OrderDuplicateStrategy;
-import com._6core.platform.orderspec.rest.v1.dto.OrderDetailsResponse;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -24,7 +24,7 @@ public class OrderCreateService implements OrderCreateUseCase {
   private final OrderRepository orderRepository;
 
   @Override
-  public Mono<OrderDetailsResponse> createOrder(OrderRequest request) {
+  public Mono<OrderV01> createOrder(OrderRequest request) {
 
     if (orderDuplicateChecker(request)) {
       return Mono.error(new RuntimeException("Order is a duplicate"));
