@@ -7,6 +7,5 @@ import org.mapstruct.Mapper;
 
 @Mapper
 public interface  OrderMapper {
-    OrderV01 mapToOrderV01(Order orderRequest);
-    OrderRequest mapToOrderRequest(OrderV01 orderV01);
+    OrderRequest mapToOrderRequest(Order orderProto);
 }

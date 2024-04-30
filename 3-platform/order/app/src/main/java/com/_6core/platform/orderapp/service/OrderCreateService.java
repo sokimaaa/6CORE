@@ -29,8 +29,7 @@ public class OrderCreateService implements OrderCreateUseCase {
   @Override
   public Mono<OrderV01> createOrder(Order protoRequest) {
 
-    OrderV01 order = mapper.mapToOrderV01(protoRequest);
-    OrderRequest request = mapper.mapToOrderRequest(order);
+    OrderRequest request = mapper.mapToOrderRequest(protoRequest);
 
     if (orderDuplicateChecker(request)) {
       return Mono.error(new RuntimeException("Order is a duplicate"));
