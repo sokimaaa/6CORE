@@ -1,4 +1,6 @@
-package com._6core.platform.orderdomain.service.duplicate.strategy;
+package com._6core.platform.orderdomain.service.duplicate;
+
+import reactor.core.publisher.Mono;
 
 public class OrderDuplicateContext<T> {
   private OrderDuplicateStrategy<T> strategy;

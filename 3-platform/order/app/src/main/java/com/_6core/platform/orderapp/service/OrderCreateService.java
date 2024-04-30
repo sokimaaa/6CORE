@@ -4,10 +4,10 @@ import com._6core.lib.java.domain.model.order.OrderV01;
 import com._6core.platform.orderapp.port.in.OrderCreateUseCase;
 import com._6core.platform.orderapp.port.out.persistence.OrderRepository;
 import com._6core.platform.orderdomain.model.OrderRequest;
-import com._6core.platform.orderdomain.service.correctness.strategy.OrderCorrectnessContext;
-import com._6core.platform.orderdomain.service.correctness.strategy.OrderCorrectnessStrategy;
-import com._6core.platform.orderdomain.service.duplicate.strategy.OrderDuplicateContext;
-import com._6core.platform.orderdomain.service.duplicate.strategy.OrderDuplicateStrategy;
+import com._6core.platform.orderdomain.service.correctness.OrderCorrectnessContext;
+import com._6core.platform.orderdomain.service.correctness.OrderCorrectnessStrategy;
+import com._6core.platform.orderdomain.service.duplicate.OrderDuplicateContext;
+import com._6core.platform.orderdomain.service.duplicate.OrderDuplicateStrategy;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -43,7 +43,9 @@ public class OrderCreateService implements OrderCreateUseCase {
 
     for (OrderDuplicateStrategy<OrderRequest> strategy : strategies) {
       duplicateContext.setStrategy(strategy);
-      if (duplicateContext.executeStrategy(request)) {
+      Mono<Boolean> resultMono = duplicateContext.executeStrategy(request);
+      boolean result = Boolean.TRUE.equals(resultMono.block());
+      if (result) {
         return true;
       }
     }

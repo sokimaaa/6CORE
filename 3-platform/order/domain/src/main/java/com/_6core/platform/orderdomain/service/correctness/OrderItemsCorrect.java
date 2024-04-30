@@ -1,7 +1,6 @@
-package com._6core.platform.orderapp.service.check.strategy.correctness;
+package com._6core.platform.orderdomain.service.correctness;
 
 import com._6core.platform.orderdomain.model.OrderRequest;
-import com._6core.platform.orderdomain.service.correctness.strategy.OrderCorrectnessStrategy;
 
 public class OrderItemsCorrect implements OrderCorrectnessStrategy<OrderRequest> {
   @Override

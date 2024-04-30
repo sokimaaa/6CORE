@@ -1,8 +1,8 @@
-package com._6core.platform.orderapp.service.check.strategy.correctness;
+package com._6core.platform.orderdomain.service.correctness;
 
 import com._6core.platform.orderdomain.model.OrderItemRequest;
 import com._6core.platform.orderdomain.model.OrderRequest;
-import com._6core.platform.orderdomain.service.correctness.strategy.OrderCorrectnessStrategy;
+
 import java.math.BigInteger;
 
 public class OrderTotalCorrect implements OrderCorrectnessStrategy<OrderRequest> {
