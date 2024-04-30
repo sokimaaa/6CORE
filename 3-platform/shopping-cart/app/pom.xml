@@ -16,5 +16,10 @@
       <artifactId>shopping-cart-domain</artifactId>
       <version>${project.parent.version}</version>
     </dependency>
+
+    <dependency>
+      <groupId>com.6core.lib</groupId>
+      <artifactId>unit-test-bundle</artifactId>
+    </dependency>
   </dependencies>
 </project>

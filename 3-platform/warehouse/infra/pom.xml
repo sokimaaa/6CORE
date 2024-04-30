@@ -10,32 +10,23 @@
 
   <artifactId>warehouse-infra</artifactId>
 
-  <dependencyManagement>
-    <dependencies>
-      <dependency>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-dependencies</artifactId>
-        <version>3.1.5</version>
-        <type>pom</type>
-        <scope>import</scope>
-      </dependency>
-    </dependencies>
-  </dependencyManagement>
-
   <dependencies>
     <dependency>
       <groupId>com.6core.platform</groupId>
       <artifactId>warehouse-app</artifactId>
       <version>0.0.1-SNAPSHOT</version>
     </dependency>
+
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-webflux</artifactId>
     </dependency>
+
     <dependency>
-      <groupId>com._6core.lib.java</groupId>
+      <groupId>com.6core.lib</groupId>
       <artifactId>reactive-postges-persistent</artifactId>
     </dependency>
+
     <dependency>
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
