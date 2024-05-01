@@ -1,6 +1,5 @@
 package com._6core.platform.warehouse.app.service;
 
-
 import com._6core.platform.warehouse.app.persistance.ProductRepository;
 import com._6core.platform.warehouse.app.port.in.ProductUseCase;
 import com._6core.platform.warehouseinfra.adapter.driven.persistence.dto.ProductResponse;
