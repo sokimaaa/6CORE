@@ -6,6 +6,5 @@ import org.mapstruct.Mapper;
 
 @Mapper
 public interface ProductMapper {
-
-    ProductResponse toProductResponse(ProductEntity product);
+  ProductResponse toProductResponse(ProductEntity product);
 }
