@@ -5,5 +5,5 @@ import java.util.List;
 import reactor.core.publisher.Flux;
 
 public interface ProductUseCase {
-    Flux<ProductResponse> getProductsByIds(List<String> productsIds);
+  Flux<ProductResponse> getProductsByIds(List<String> productsIds);
 }

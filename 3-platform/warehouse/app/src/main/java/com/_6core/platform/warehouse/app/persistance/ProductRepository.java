@@ -6,5 +6,5 @@ import reactor.core.publisher.Flux;
 
 
 public interface ProductRepository {
-    Flux<ProductEntity> getProductsByIds(List<String> productsIds);
+  Flux<ProductEntity> getProductsByIds(List<String> productsIds);
 }

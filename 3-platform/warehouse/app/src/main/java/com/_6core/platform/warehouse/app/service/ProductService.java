@@ -11,12 +11,11 @@ import reactor.core.publisher.Flux;
 
 @RequiredArgsConstructor
 public class ProductService implements ProductUseCase {
-    private final ProductRepository productRepository;
-    private final ProductMapper productMapper;
+  private final ProductRepository productRepository;
+  private final ProductMapper productMapper;
 
-    @Override
-    public Flux<ProductResponse> getProductsByIds(List<String> productsIds) {
-        return productRepository.getProductsByIds(productsIds)
-                .map(productMapper::toProductResponse);
-    }
+  @Override
+  public Flux<ProductResponse> getProductsByIds(List<String> productsIds) {
+    return productRepository.getProductsByIds(productsIds).map(productMapper::toProductResponse);
+  }
 }
