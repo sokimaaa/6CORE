@@ -1,7 +1,6 @@
 package com._6core.platform.orderapp.service;
 
 import com._6core.lib.java.domain.model.order.OrderV01;
-import com._6core.lib.proto.domain.model.Order;
 import com._6core.platform.orderapp.port.in.OrderCreateUseCase;
 import com._6core.platform.orderapp.port.out.persistence.OrderRepository;
 import com._6core.platform.orderdomain.mapper.OrderMapper;
@@ -25,21 +24,17 @@ public class OrderCreateService implements OrderCreateUseCase {
   private final OrderCorrectnessContext<OrderRequest> correctnessContext;
   private final OrderRepository orderRepository;
   private final OrderMapper mapper;
-  ;
+
 
   @Override
-  public Mono<OrderV01> createOrder(Order protoRequest) {
-
-    OrderRequest request = mapper.mapToOrderRequest(protoRequest);
-
+  public Mono<OrderV01> createOrder(OrderRequest request) {
     if (orderDuplicateChecker(request)) {
       return Mono.error(new RuntimeException("Order is a duplicate"));
     }
     if (!orderCorrectness(request)) {
       return Mono.error(new RuntimeException("Invalid order data"));
     }
-
-    return orderRepository.createOrder(protoRequest);
+    return orderRepository.createOrder(mapper.mapToImmutableOrder(request));
   }
 
   public boolean orderDuplicateChecker(OrderRequest request) {
