@@ -11,11 +11,10 @@ import com._6core.platform.orderdomain.service.correctness.OrderItemsCorrect;
 import com._6core.platform.orderdomain.service.correctness.OrderTotalCorrect;
 import com._6core.platform.orderdomain.service.duplicate.OrderDuplicateContext;
 import com._6core.platform.orderdomain.service.duplicate.OrderDuplicateStrategy;
-import java.util.ArrayList;
-import java.util.List;
-
 import com._6core.platform.orderdomain.service.duplicate.OrderIDDuplicateStrategy;
 import com._6core.platform.orderdomain.service.duplicate.UserIDDuplicateStrategy;
+import java.util.ArrayList;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import reactor.core.publisher.Mono;
 
@@ -27,7 +26,6 @@ public class OrderCreateService implements OrderCreateUseCase {
   private final OrderItemsCorrect orderItemsCorrect;
   private final OrderRepository orderRepository;
   private final OrderMapper mapper;
-
 
   @Override
   public Mono<OrderV01> createOrder(OrderRequest request) {
@@ -42,7 +40,8 @@ public class OrderCreateService implements OrderCreateUseCase {
   }
 
   public boolean orderDuplicateChecker(OrderRequest request) {
-    OrderDuplicateContext<OrderRequest> duplicateContext = new OrderDuplicateContext<OrderRequest>();
+    OrderDuplicateContext<OrderRequest> duplicateContext =
+        new OrderDuplicateContext<OrderRequest>();
     List<OrderDuplicateStrategy<OrderRequest>> strategies = new ArrayList<>();
     strategies.add(orderIdDuplicateStrategy);
     strategies.add(userIdDuplicateStrategy);

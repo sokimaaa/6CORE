@@ -13,9 +13,6 @@ public class OrderIDDuplicateStrategy implements OrderDuplicateStrategy<OrderReq
   @Override
   public boolean isDuplicate(OrderRequest request) {
     System.out.println("Check by order id");
-    return orderHelper.getOrderById(request.orderId())
-            .hasElement()
-            .blockOptional()
-            .orElse(false);
+    return orderHelper.getOrderById(request.orderId()).hasElement().blockOptional().orElse(false);
   }
 }

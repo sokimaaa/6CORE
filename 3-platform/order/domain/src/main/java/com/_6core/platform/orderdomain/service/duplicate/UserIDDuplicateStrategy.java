@@ -12,9 +12,10 @@ public class UserIDDuplicateStrategy implements OrderDuplicateStrategy<OrderRequ
 
   @Override
   public boolean isDuplicate(OrderRequest request) {
-    return orderHelper.getOrderByUserId(request.userId())
-            .hasElement()
-            .blockOptional()
-            .orElse(false);
+    return orderHelper
+        .getOrderByUserId(request.userId())
+        .hasElement()
+        .blockOptional()
+        .orElse(false);
   }
 }
