@@ -2,7 +2,6 @@ package com._6core.platform.orderdomain.service.duplicate;
 
 import com._6core.platform.orderdomain.model.OrderRequest;
 import com._6core.platform.orderdomain.service.helper.OrderHelperService;
-import reactor.core.publisher.Mono;
 
 public class UserIDDuplicateStrategy implements OrderDuplicateStrategy<OrderRequest> {
   private final OrderHelperService orderHelper;
@@ -12,7 +11,10 @@ public class UserIDDuplicateStrategy implements OrderDuplicateStrategy<OrderRequ
   }
 
   @Override
-  public Mono<Boolean> isDuplicate(OrderRequest request) {
-    return orderHelper.getOrderByUserId(request.userId()).hasElement();
+  public boolean isDuplicate(OrderRequest request) {
+    return orderHelper.getOrderByUserId(request.userId())
+            .hasElement()
+            .blockOptional()
+            .orElse(false);
   }
 }

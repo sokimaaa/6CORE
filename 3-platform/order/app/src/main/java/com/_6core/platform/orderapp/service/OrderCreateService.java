@@ -7,21 +7,24 @@ import com._6core.platform.orderdomain.mapper.OrderMapper;
 import com._6core.platform.orderdomain.model.OrderRequest;
 import com._6core.platform.orderdomain.service.correctness.OrderCorrectnessContext;
 import com._6core.platform.orderdomain.service.correctness.OrderCorrectnessStrategy;
+import com._6core.platform.orderdomain.service.correctness.OrderItemsCorrect;
+import com._6core.platform.orderdomain.service.correctness.OrderTotalCorrect;
 import com._6core.platform.orderdomain.service.duplicate.OrderDuplicateContext;
 import com._6core.platform.orderdomain.service.duplicate.OrderDuplicateStrategy;
 import java.util.ArrayList;
 import java.util.List;
+
+import com._6core.platform.orderdomain.service.duplicate.OrderIDDuplicateStrategy;
+import com._6core.platform.orderdomain.service.duplicate.UserIDDuplicateStrategy;
 import lombok.RequiredArgsConstructor;
 import reactor.core.publisher.Mono;
 
 @RequiredArgsConstructor
 public class OrderCreateService implements OrderCreateUseCase {
-  private final OrderDuplicateStrategy<OrderRequest> orderIdDuplicateStrategy;
-  private final OrderDuplicateStrategy<OrderRequest> userIdDuplicateStrategy;
-  private final OrderDuplicateContext<OrderRequest> duplicateContext;
-  private final OrderCorrectnessStrategy<OrderRequest> orderTotalCorrect;
-  private final OrderCorrectnessStrategy<OrderRequest> orderItemsCorrect;
-  private final OrderCorrectnessContext<OrderRequest> correctnessContext;
+  private final OrderIDDuplicateStrategy orderIdDuplicateStrategy;
+  private final UserIDDuplicateStrategy userIdDuplicateStrategy;
+  private final OrderTotalCorrect orderTotalCorrect;
+  private final OrderItemsCorrect orderItemsCorrect;
   private final OrderRepository orderRepository;
   private final OrderMapper mapper;
 
@@ -34,18 +37,19 @@ public class OrderCreateService implements OrderCreateUseCase {
     if (!orderCorrectness(request)) {
       return Mono.error(new RuntimeException("Invalid order data"));
     }
-    return orderRepository.createOrder(mapper.mapToImmutableOrder(request));
+
+    return orderRepository.createOrder(mapper.mapToOrderV01(request));
   }
 
   public boolean orderDuplicateChecker(OrderRequest request) {
+    OrderDuplicateContext<OrderRequest> duplicateContext = new OrderDuplicateContext<OrderRequest>();
     List<OrderDuplicateStrategy<OrderRequest>> strategies = new ArrayList<>();
     strategies.add(orderIdDuplicateStrategy);
     strategies.add(userIdDuplicateStrategy);
 
     for (OrderDuplicateStrategy<OrderRequest> strategy : strategies) {
       duplicateContext.setStrategy(strategy);
-      Mono<Boolean> booleanMono = duplicateContext.executeStrategy(request);
-      if (Boolean.TRUE.equals(booleanMono.block())) {
+      if (duplicateContext.executeStrategy(request)) {
         return true;
       }
     }
@@ -53,6 +57,7 @@ public class OrderCreateService implements OrderCreateUseCase {
   }
 
   public boolean orderCorrectness(OrderRequest request) {
+    OrderCorrectnessContext<OrderRequest> correctnessContext = new OrderCorrectnessContext<>();
     List<OrderCorrectnessStrategy<OrderRequest>> strategies = new ArrayList<>();
     strategies.add(orderItemsCorrect);
     strategies.add(orderTotalCorrect);
