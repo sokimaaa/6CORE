@@ -1,6 +1,7 @@
 package com._6core.platform.orderdomain.mapper;
 
 import com._6core.lib.java.domain.model.order.OrderItemV01;
+import com._6core.lib.java.domain.model.order.OrderV01;
 import com._6core.lib.java.domain.model.order.immutable.ImmutableOrderItemV01Impl;
 import com._6core.lib.java.domain.model.order.immutable.ImmutableOrderV01Impl;
 import com._6core.platform.orderdomain.model.OrderItemRequest;
@@ -14,7 +15,7 @@ import org.mapstruct.Named;
 
 @Mapper
 public interface OrderMapper {
-  OrderRequest mapToOrderRequest(ImmutableOrderV01Impl order);
+  OrderRequest mapToOrderRequest(OrderV01 order);
 
   @Mapping(target = "orderItems", source = "orderItems", qualifiedByName = "mapOrderItemRequests")
   ImmutableOrderV01Impl mapToOrderV01(OrderRequest request);
