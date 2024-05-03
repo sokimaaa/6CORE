@@ -1,6 +1,6 @@
 package com._6core.platform.shopping.cart.domain.mapper;
 
-import com._6core.platform.shopping.cart.domain.ValidationResponse;
+import com._6core.platform.shopping.cart.domain.dto.internal.ValidationResponse;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 

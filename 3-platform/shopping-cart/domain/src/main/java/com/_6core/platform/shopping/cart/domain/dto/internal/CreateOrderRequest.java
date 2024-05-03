@@ -1,4 +1,4 @@
-package com._6core.platform.shopping.cart.domain;
+package com._6core.platform.shopping.cart.domain.dto.internal;
 
 import java.util.List;
 

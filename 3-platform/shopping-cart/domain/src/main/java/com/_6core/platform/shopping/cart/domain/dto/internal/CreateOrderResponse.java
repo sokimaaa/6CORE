@@ -1,3 +1,3 @@
-package com._6core.platform.shopping.cart.domain;
+package com._6core.platform.shopping.cart.domain.dto.internal;
 
 public record CreateOrderResponse(String orderId, Boolean isOk) {}

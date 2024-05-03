@@ -1,8 +1,8 @@
 package com._6core.platform.shopping.cart.domain.mapper;
 
-import com._6core.platform.shopping.cart.domain.CartId;
-import com._6core.platform.shopping.cart.domain.CreateOrderResponse;
-import com._6core.platform.shopping.cart.spec.rest.v1.response.CheckoutShoppingCartResponse;
+import com._6core.platform.shopping.cart.domain.dto.internal.CartId;
+import com._6core.platform.shopping.cart.domain.dto.internal.CheckoutResponse;
+import com._6core.platform.shopping.cart.domain.dto.internal.CreateOrderResponse;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 
@@ -12,5 +12,5 @@ public interface CreateOrderResponse2CheckoutShoppingCartResponse {
 
   @Mapping(target = "ok", source = "isOk")
   @Mapping(target = "transactionalId", ignore = true)
-  CheckoutShoppingCartResponse map(CreateOrderResponse orderResponse, CartId cartId);
+  CheckoutResponse map(CreateOrderResponse orderResponse, CartId cartId);
 }
