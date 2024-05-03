@@ -13,6 +13,11 @@ public abstract class BaseValidationChain<T extends ShoppingCartV01>
     this.next = validator;
   }
 
+  @Override
+  public Validator<ShoppingCartV01> getNext() {
+    return next;
+  }
+
   protected ValidationResponse validateNext(final T domainModel) {
     return Boolean2ValidationResponseMapper.INCTANCE.map(
         next == null || next.validate(domainModel).getIsValid());

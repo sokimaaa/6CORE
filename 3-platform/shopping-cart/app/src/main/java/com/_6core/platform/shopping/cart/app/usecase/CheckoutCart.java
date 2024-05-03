@@ -35,7 +35,7 @@ public class CheckoutCart implements CheckoutUseCase {
             .get(id)
             .filter(cart -> validator.validate(cart).getIsValid())
             .map(ShoppingCart2CreateOrderRequest.INCTANCE::map)
-            .flatMap(order -> grcpPort.createOrder(order));
+            .flatMap(grcpPort::createOrder);
     checkoutShoppingCartPort.clean(id);
     return orderResponse.map(
         r -> CreateOrderResponse2CheckoutShoppingCartResponse.INCTANCE.map(r, id));

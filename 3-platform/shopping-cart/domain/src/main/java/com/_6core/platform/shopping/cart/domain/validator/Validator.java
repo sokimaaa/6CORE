@@ -7,4 +7,6 @@ public interface Validator<T extends ShoppingCartV01> {
   ValidationResponse validate(final T domainModel);
 
   public void setNext(final Validator<T> validator);
+
+  public Validator<ShoppingCartV01> getNext();
 }

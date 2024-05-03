@@ -9,6 +9,6 @@ public class CartNotEmpty extends BaseValidationChain<ShoppingCartV01> {
   @Override
   public ValidationResponse validate(ShoppingCartV01 cartEntity) {
     return Boolean2ValidationResponseMapper.INCTANCE.map(
-        !cartEntity.productIds().isEmpty() || validateNext(cartEntity).getIsValid());
+        !cartEntity.productIds().isEmpty() && validateNext(cartEntity).getIsValid());
   }
 }
