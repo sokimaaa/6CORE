@@ -1,4 +1,4 @@
-package com._6core.platform.warehouseinfra.adapter.driven.persistence.dto;
+package com._6core.platform.warehouse.domain.dto;
 
 import java.math.BigDecimal;
 
