@@ -8,7 +8,7 @@ import org.mapstruct.factory.Mappers;
 
 @Mapper
 public interface ShoppingCart2CreateOrderRequest {
-  ShoppingCart2CreateOrderRequest INCTANCE =
+  ShoppingCart2CreateOrderRequest INSTANCE =
       Mappers.getMapper(ShoppingCart2CreateOrderRequest.class);
 
   @Mapping(target = "productIds", expression = "java(cartDomain.productIds())")

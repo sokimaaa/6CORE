@@ -8,7 +8,7 @@ import com._6core.platform.shopping.cart.domain.validator.BaseValidationChain;
 public class CartNotEmpty extends BaseValidationChain<ShoppingCartV01> {
   @Override
   public ValidationResponse validate(ShoppingCartV01 cartEntity) {
-    return Boolean2ValidationResponseMapper.INCTANCE.map(
+    return Boolean2ValidationResponseMapper.INSTANCE.map(
         !cartEntity.productIds().isEmpty() && validateNext(cartEntity).getIsValid());
   }
 }

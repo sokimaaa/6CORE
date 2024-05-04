@@ -19,7 +19,7 @@ public abstract class BaseValidationChain<T extends ShoppingCartV01>
   }
 
   protected ValidationResponse validateNext(final T domainModel) {
-    return Boolean2ValidationResponseMapper.INCTANCE.map(
+    return Boolean2ValidationResponseMapper.INSTANCE.map(
         next == null || next.validate(domainModel).getIsValid());
   }
 

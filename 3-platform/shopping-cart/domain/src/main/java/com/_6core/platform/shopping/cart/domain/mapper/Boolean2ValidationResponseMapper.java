@@ -7,7 +7,7 @@ import org.mapstruct.factory.Mappers;
 
 @Mapper
 public interface Boolean2ValidationResponseMapper {
-  Boolean2ValidationResponseMapper INCTANCE =
+  Boolean2ValidationResponseMapper INSTANCE =
       Mappers.getMapper(Boolean2ValidationResponseMapper.class);
 
   @Mapping(target = "isValid", source = "response")

@@ -9,7 +9,7 @@ import org.mapstruct.factory.Mappers;
 
 @Mapper
 public interface CreateOrderResponse2CheckoutShoppingCartResponse {
-  CreateOrderResponse2CheckoutShoppingCartResponse INCTANCE =
+  CreateOrderResponse2CheckoutShoppingCartResponse INSTANCE =
       Mappers.getMapper(CreateOrderResponse2CheckoutShoppingCartResponse.class);
 
   @Mapping(target = "transactionId", ignore = true)
