@@ -1,19 +1,19 @@
 package com._6core.platform.orderdomain.service.duplicate;
 
-import com._6core.platform.orderdomain.model.OrderRequest;
+import com._6core.platform.orderdomain.dto.OrderRequest;
 import com._6core.platform.orderdomain.service.helper.OrderHelperService;
 
-public class UserIDDuplicateStrategy implements OrderDuplicateStrategy<OrderRequest> {
+public class StatusDuplicateStrategy implements OrderDuplicateStrategy<OrderRequest> {
   private final OrderHelperService orderHelper;
 
-  public UserIDDuplicateStrategy(OrderHelperService orderHelper) {
+  public StatusDuplicateStrategy(OrderHelperService orderHelper) {
     this.orderHelper = orderHelper;
   }
 
   @Override
   public boolean isDuplicate(OrderRequest request) {
     return orderHelper
-        .getOrderByUserId(request.userId())
+        .getOrderByIdAndStatus(request.orderId(), request.status())
         .hasElement()
         .blockOptional()
         .orElse(false);

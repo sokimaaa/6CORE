@@ -1,6 +1,6 @@
 package com._6core.platform.orderdomain.service.correctness;
 
-import com._6core.platform.orderdomain.model.OrderRequest;
+import com._6core.platform.orderdomain.dto.OrderRequest;
 import java.math.BigInteger;
 import java.util.Objects;
 

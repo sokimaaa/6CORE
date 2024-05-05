@@ -18,7 +18,7 @@ public class OrderHelperImpl implements OrderHelperService {
   }
 
   @Override
-  public Mono<OrderV01> getOrderByUserId(String userId) {
-    return orderRepository.getOrderByUserId(userId);
+  public Mono<OrderV01> getOrderByIdAndStatus(String orderId, String status) {
+    return orderRepository.getOrderByIdAndStatus(orderId, status);
   }
 }

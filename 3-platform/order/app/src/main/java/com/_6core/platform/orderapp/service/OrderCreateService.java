@@ -4,28 +4,29 @@ import com._6core.lib.java.domain.model.order.OrderV01;
 import com._6core.platform.orderapp.port.in.OrderCreateUseCase;
 import com._6core.platform.orderapp.port.out.persistence.OrderRepository;
 import com._6core.platform.orderdomain.mapper.OrderMapper;
-import com._6core.platform.orderdomain.model.OrderRequest;
+import com._6core.platform.orderdomain.dto.OrderRequest;
 import com._6core.platform.orderdomain.service.correctness.OrderCorrectnessContext;
 import com._6core.platform.orderdomain.service.correctness.OrderCorrectnessStrategy;
 import com._6core.platform.orderdomain.service.correctness.OrderItemsCorrect;
 import com._6core.platform.orderdomain.service.correctness.OrderTotalCorrect;
 import com._6core.platform.orderdomain.service.duplicate.OrderDuplicateContext;
 import com._6core.platform.orderdomain.service.duplicate.OrderDuplicateStrategy;
-import com._6core.platform.orderdomain.service.duplicate.OrderIDDuplicateStrategy;
-import com._6core.platform.orderdomain.service.duplicate.UserIDDuplicateStrategy;
 import java.util.ArrayList;
 import java.util.List;
+import com._6core.platform.orderdomain.service.duplicate.OrderIDDuplicateStrategy;
+import com._6core.platform.orderdomain.service.duplicate.StatusDuplicateStrategy;
 import lombok.RequiredArgsConstructor;
 import reactor.core.publisher.Mono;
 
 @RequiredArgsConstructor
 public class OrderCreateService implements OrderCreateUseCase {
   private final OrderIDDuplicateStrategy orderIdDuplicateStrategy;
-  private final UserIDDuplicateStrategy userIdDuplicateStrategy;
+  private final StatusDuplicateStrategy statusDuplicateStrategy;
   private final OrderTotalCorrect orderTotalCorrect;
   private final OrderItemsCorrect orderItemsCorrect;
   private final OrderRepository orderRepository;
   private final OrderMapper mapper;
+
 
   @Override
   public Mono<OrderV01> createOrder(OrderRequest request) {
@@ -36,15 +37,14 @@ public class OrderCreateService implements OrderCreateUseCase {
       return Mono.error(new RuntimeException("Invalid order data"));
     }
 
-    return orderRepository.createOrder(mapper.mapToOrderV01(request));
+    return orderRepository.createOrder(request);
   }
 
   public boolean orderDuplicateChecker(OrderRequest request) {
-    OrderDuplicateContext<OrderRequest> duplicateContext =
-        new OrderDuplicateContext<OrderRequest>();
+    OrderDuplicateContext<OrderRequest> duplicateContext = new OrderDuplicateContext<>();
     List<OrderDuplicateStrategy<OrderRequest>> strategies = new ArrayList<>();
     strategies.add(orderIdDuplicateStrategy);
-    strategies.add(userIdDuplicateStrategy);
+    strategies.add(statusDuplicateStrategy);
 
     for (OrderDuplicateStrategy<OrderRequest> strategy : strategies) {
       duplicateContext.setStrategy(strategy);

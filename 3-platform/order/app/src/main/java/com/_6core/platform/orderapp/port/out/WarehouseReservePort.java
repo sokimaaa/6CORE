@@ -5,6 +5,5 @@ import reactor.core.publisher.Mono;
 
 public interface WarehouseReservePort {
   Mono<ProductStatus> isAvailable(String productId, Integer quantity);
-
   Mono<ProductStatus> reserve(String productId, Integer quantity);
 }
