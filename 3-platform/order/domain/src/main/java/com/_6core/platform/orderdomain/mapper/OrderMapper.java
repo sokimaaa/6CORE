@@ -25,7 +25,6 @@ public interface OrderMapper {
   @Mapping(target = "orderItems", source = "orderItems", qualifiedByName = "mapOrderItemResponse")
   ImmutableOrderV01Impl mapToOrderV01(OrderResponse response);
 
-
   @Mapping(target = "orderItems", source = "orderItems", qualifiedByName = "mapOrderItemRequests")
   ImmutableOrderV01Impl mapToObject(OrderRequest request);
 
@@ -36,7 +35,7 @@ public interface OrderMapper {
     for (OrderItemRequest itemRequest : orderItemRequests) {
       ImmutableOrderItemV01Impl item =
           ImmutableOrderItemV01Impl.builder()
-                  .orderId(itemRequest.orderId())
+              .orderId(itemRequest.orderId())
               .itemId(itemRequest.itemId())
               .quantity(itemRequest.quantity())
               .productId(itemRequest.productId())
@@ -49,20 +48,19 @@ public interface OrderMapper {
 
   @Named("mapOrderItemResponse")
   default Iterable<? extends OrderItemV01> mapOrderItemResponse(
-          Set<OrderItemResponse> orderItemResponses) {
+      Set<OrderItemResponse> orderItemResponses) {
     Set<OrderItemV01> orderItems = new HashSet<>();
     for (OrderItemResponse itemResponse : orderItemResponses) {
       ImmutableOrderItemV01Impl item =
-              ImmutableOrderItemV01Impl.builder()
-                      .orderId(itemResponse.orderId())
-                      .itemId(itemResponse.itemId())
-                      .quantity(itemResponse.quantity())
-                      .productId(itemResponse.productId())
-                      .price(itemResponse.price())
-                      .build();
+          ImmutableOrderItemV01Impl.builder()
+              .orderId(itemResponse.orderId())
+              .itemId(itemResponse.itemId())
+              .quantity(itemResponse.quantity())
+              .productId(itemResponse.productId())
+              .price(itemResponse.price())
+              .build();
       orderItems.add(item);
     }
     return orderItems;
   }
-
 }

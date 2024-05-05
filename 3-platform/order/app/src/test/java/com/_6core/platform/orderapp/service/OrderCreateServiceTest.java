@@ -1,15 +1,15 @@
 package com._6core.platform.orderapp.service;
 
 import static org.mockito.Mockito.when;
+
 import com._6core.lib.java.domain.model.order.immutable.ImmutableOrderItemV01Impl;
 import com._6core.lib.java.domain.model.order.immutable.ImmutableOrderV01Impl;
 import com._6core.platform.orderapp.port.out.persistence.OrderRepository;
+import com._6core.platform.orderdomain.dto.OrderItemRequest;
 import com._6core.platform.orderdomain.dto.OrderItemResponse;
 import com._6core.platform.orderdomain.dto.OrderRequest;
 import com._6core.platform.orderdomain.dto.OrderResponse;
 import com._6core.platform.orderdomain.mapper.OrderMapper;
-import com._6core.platform.orderdomain.dto.OrderItemRequest;
-import com._6core.platform.orderdomain.model.OrderStatus;
 import com._6core.platform.orderdomain.service.correctness.OrderItemsCorrect;
 import com._6core.platform.orderdomain.service.correctness.OrderTotalCorrect;
 import com._6core.platform.orderdomain.service.duplicate.OrderIDDuplicateStrategy;
@@ -47,20 +47,18 @@ public class OrderCreateServiceTest {
 
   @Before
   public void setup() {
-    OrderItemRequest item1 = new OrderItemRequest("item1", "2", 10,
-            BigInteger.valueOf(100), "order123");
-    OrderItemRequest item2 = new OrderItemRequest("item2", "1", 15,
-            BigInteger.valueOf(150), "order123");
-    OrderItemResponse item3 = new OrderItemResponse("item1", "2", 10,
-            BigInteger.valueOf(100), "order123");
-    OrderItemResponse item4 = new OrderItemResponse("item2", "1", 15,
-            BigInteger.valueOf(150), "order123");
+    OrderItemRequest item1 =
+        new OrderItemRequest("item1", "2", 10, BigInteger.valueOf(100), "order123");
+    OrderItemRequest item2 =
+        new OrderItemRequest("item2", "1", 15, BigInteger.valueOf(150), "order123");
+    OrderItemResponse item3 =
+        new OrderItemResponse("item1", "2", 10, BigInteger.valueOf(100), "order123");
+    OrderItemResponse item4 =
+        new OrderItemResponse("item2", "1", 15, BigInteger.valueOf(150), "order123");
     Set<OrderItemRequest> orderItems = Set.of(item1, item2);
     Set<OrderItemResponse> orderItemsResponse = Set.of(item3, item4);
-    response =
-        new OrderResponse("order123", "new", BigInteger.valueOf(250), orderItemsResponse);
-    request =
-            new OrderRequest("order123", "new", BigInteger.valueOf(250), orderItems);
+    response = new OrderResponse("order123", "new", BigInteger.valueOf(250), orderItemsResponse);
+    request = new OrderRequest("order123", "new", BigInteger.valueOf(250), orderItems);
     orderBuilder = ImmutableOrderV01Impl.builder();
     orderBuilder.orderId(response.orderId());
     orderBuilder.status(response.status());
@@ -80,7 +78,7 @@ public class OrderCreateServiceTest {
     orderCreateService =
         new OrderCreateService(
             orderIdDuplicateStrategy,
-                statusDuplicateStrategy,
+            statusDuplicateStrategy,
             orderTotalCorrect,
             orderItemsCorrect,
             orderRepository,
