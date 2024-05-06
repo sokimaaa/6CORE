@@ -11,6 +11,6 @@ public interface ShoppingCart2CreateOrderRequest {
   ShoppingCart2CreateOrderRequest INSTANCE =
       Mappers.getMapper(ShoppingCart2CreateOrderRequest.class);
 
-  @Mapping(target = "productIds", expression = "java(cartDomain.productIds())")
+  @Mapping(target = "productIds", source = "productIds")
   CreateOrderRequest map(ShoppingCartV01 cartDomain);
 }

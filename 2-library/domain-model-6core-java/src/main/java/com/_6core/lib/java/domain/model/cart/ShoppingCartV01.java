@@ -9,7 +9,7 @@ public interface ShoppingCartV01 extends Serializable {
      *
      * @return the cart id
      */
-    String cartId();
+    String getCartId();
 
     /**
      * A list of product ids that have been added to the shopping cart.
@@ -20,5 +20,5 @@ public interface ShoppingCartV01 extends Serializable {
      *
      * @return the product ids
      */
-    List<String> productIds();
+    List<String> getProductIds();
 }

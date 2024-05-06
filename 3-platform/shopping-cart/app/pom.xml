@@ -16,7 +16,6 @@
       <artifactId>shopping-cart-domain</artifactId>
       <version>${project.parent.version}</version>
     </dependency>
-
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-api</artifactId>
@@ -30,6 +29,14 @@
       <groupId>io.projectreactor</groupId>
       <artifactId>reactor-test</artifactId>
       <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.6core.lib</groupId>
+      <artifactId>reactive-postges-persistent</artifactId>
     </dependency>
   </dependencies>
 </project>

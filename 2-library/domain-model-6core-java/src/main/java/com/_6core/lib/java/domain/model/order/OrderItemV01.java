@@ -9,28 +9,28 @@ public interface OrderItemV01 extends Serializable {
      *
      * @return the item id
      */
-    String itemId();
+    String getItemId();
 
     /**
      * The order that owns an item.
      *
      * @return the order id
      */
-    String orderId();
+    String getOrderId();
 
     /**
      * The product that was added to order.
      *
      * @return the product id
      */
-    String productId();
+    String getProductId();
 
     /**
      * The number of products that was ordered.
      *
      * @return the quantity
      */
-    Integer quantity();
+    Integer getQuantity();
 
     /**
      * Calculates and returns the price of the current order item.
@@ -45,5 +45,5 @@ public interface OrderItemV01 extends Serializable {
      *
      * @return The total price
      */
-    BigInteger price();
+    BigInteger getPrice();
 }
