@@ -9,5 +9,5 @@ public interface ShoppingCartV02 extends ShoppingCartV01 {
      *
      * @return the user id
      */
-    String userId();
+    String getUserId();
 }

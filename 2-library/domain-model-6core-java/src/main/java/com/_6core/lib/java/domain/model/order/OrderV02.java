@@ -9,5 +9,5 @@ public interface OrderV02 extends OrderV01 {
      *
      * @return the user id
      */
-    String userId();
+    String getUserId();
 }
