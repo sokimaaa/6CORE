@@ -43,7 +43,7 @@ public class OrderMapperTest {
   }
 
   @Test
-  public void MapToOrderResponse_ok() {
+  public void mapToOrderResponse_ok() {
     ImmutableOrderV01Impl order = orderBuilder.build();
     Mono<ImmutableOrderV01Impl> orderMono = Mono.just(order);
 
@@ -62,7 +62,7 @@ public class OrderMapperTest {
   }
 
   @Test
-  public void testMapToOrderV01() {
+  public void mapToOrderV01_success() {
     OrderItemRequest item1 =
         new OrderItemRequest("item1", "2", 10, BigInteger.valueOf(100), "order123");
     OrderItemRequest item2 =
