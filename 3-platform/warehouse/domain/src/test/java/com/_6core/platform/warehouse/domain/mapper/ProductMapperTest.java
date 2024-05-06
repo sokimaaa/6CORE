@@ -8,9 +8,7 @@ import com._6core.platform.warehouse.domain.dto.product.ProductResponse;
 import java.math.BigInteger;
 import org.junit.jupiter.api.Test;
 
-
 class ProductMapperTest {
-
   @Test
   public void mapToProductResponse_fullProductV01_validProductResponse() {
     ProductV01 productV01 =
