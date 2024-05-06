@@ -4,12 +4,10 @@ import com._6core.lib.java.domain.model.order.OrderItemV01;
 import com._6core.lib.java.domain.model.order.immutable.ImmutableOrderItemV01Impl;
 import com._6core.lib.java.domain.model.order.immutable.ImmutableOrderV01Impl;
 import com._6core.platform.orderdomain.dto.OrderItemRequest;
-import com._6core.platform.orderdomain.dto.OrderItemResponse;
 import com._6core.platform.orderdomain.dto.OrderRequest;
 import com._6core.platform.orderdomain.dto.OrderResponse;
 import java.math.BigInteger;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import org.mapstruct.Mapper;
@@ -51,21 +49,5 @@ public interface OrderMapper {
       orderItems.add(item);
     }
     return orderItems;
-  }
-
-  @Named("mapToOrderItemResponse")
-  default Set<OrderItemResponse> mapToOrderItemResponse(Set<OrderItemV01> orderItems) {
-    Set<OrderItemResponse> orderItemResponses = new HashSet<>();
-    for (OrderItemV01 orderItem : orderItems) {
-      OrderItemResponse item =
-          new OrderItemResponse(
-              orderItem.getOrderId(),
-              orderItem.getItemId(),
-              orderItem.getQuantity(),
-              orderItem.getPrice(),
-              orderItem.getProductId());
-      orderItemResponses.add(item);
-    }
-    return orderItemResponses;
   }
 }
