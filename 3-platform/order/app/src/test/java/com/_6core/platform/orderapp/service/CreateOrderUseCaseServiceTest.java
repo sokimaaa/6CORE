@@ -102,10 +102,10 @@ public class CreateOrderUseCaseServiceTest {
         .as(StepVerifier::create)
         .consumeNextWith(
             orderBuilder -> {
-              Assertions.assertEquals(response.orderId(), order.orderId());
-              Assertions.assertEquals(response.total(), order.total());
-              Assertions.assertNotNull(response.status(), order.status());
-              Assertions.assertEquals(response.orderItems().size(), order.orderItems().size());
+              Assertions.assertEquals(response.orderId(), order.getOrderId());
+              Assertions.assertEquals(response.total(), order.getTotal());
+              Assertions.assertNotNull(response.status(), order.getStatus());
+              Assertions.assertEquals(response.orderItems().size(), order.getOrderItems().size());
             })
         .verifyComplete();
   }

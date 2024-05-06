@@ -23,10 +23,6 @@ public interface OrderMapper {
 
   OrderMapper INSTANCE = Mappers.getMapper(OrderMapper.class);
 
-  @Mapping(target = "orderId", expression = "java(order.orderId())")
-  @Mapping(target = "status", expression = "java(order.status())")
-  @Mapping(target = "total", expression = "java(order.total())")
-  @Mapping(target = "orderItems", expression = "java(mapToOrderItemResponse(order.orderItems()))")
   OrderResponse mapToResponseDto(ImmutableOrderV01Impl order);
 
   default Mono<OrderResponse> mapToResponseDto(Mono<ImmutableOrderV01Impl> orderMono) {
@@ -63,11 +59,11 @@ public interface OrderMapper {
     for (OrderItemV01 orderItem : orderItems) {
       OrderItemResponse item =
           new OrderItemResponse(
-              orderItem.orderId(),
-              orderItem.itemId(),
-              orderItem.quantity(),
-              orderItem.price(),
-              orderItem.productId());
+              orderItem.getOrderId(),
+              orderItem.getItemId(),
+              orderItem.getQuantity(),
+              orderItem.getPrice(),
+              orderItem.getProductId());
       orderItemResponses.add(item);
     }
     return orderItemResponses;

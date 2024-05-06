@@ -54,9 +54,9 @@ public class OrderMapperTest {
         .as(StepVerifier::create)
         .consumeNextWith(
             response -> {
-              Assertions.assertEquals(response.orderId(), order.orderId());
-              Assertions.assertEquals(response.status(), order.status());
-              Assertions.assertEquals(response.total(), order.total());
+              Assertions.assertEquals(response.orderId(), order.getOrderId());
+              Assertions.assertEquals(response.status(), order.getOrderId());
+              Assertions.assertEquals(response.total(), order.getTotal());
             })
         .verifyComplete();
   }
@@ -73,9 +73,9 @@ public class OrderMapperTest {
 
     ImmutableOrderV01Impl order = mapper.INSTANCE.mapToObject(request);
 
-    Assertions.assertEquals("order123", order.orderId());
-    Assertions.assertEquals("pending", order.status());
-    Assertions.assertEquals(BigInteger.valueOf(250), order.total());
-    Assertions.assertEquals(2, order.orderItems().size());
+    Assertions.assertEquals("order123", order.getOrderId());
+    Assertions.assertEquals("pending", order.getStatus());
+    Assertions.assertEquals(BigInteger.valueOf(250), order.getTotal());
+    Assertions.assertEquals(2, order.getOrderItems().size());
   }
 }
