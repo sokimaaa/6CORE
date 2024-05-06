@@ -32,5 +32,10 @@
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
     </dependency>
+
+    <dependency>
+      <groupId>com.6core.lib</groupId>
+      <artifactId>unit-test-bundle</artifactId>
+    </dependency>
   </dependencies>
 </project>

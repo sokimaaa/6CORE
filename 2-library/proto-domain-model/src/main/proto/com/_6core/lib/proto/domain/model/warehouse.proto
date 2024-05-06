@@ -12,7 +12,6 @@ message ProductV01 {
     string image = 4;
     repeated bytes price = 5;
     string category = 6;
-    InventoryV01 inventory = 7;
 }
 
 message InventoryV01 {

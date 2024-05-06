@@ -10,28 +10,28 @@ public interface ProductV01 extends Serializable {
      *
      * @return the product id
      */
-    String productId();
+    String getProductId();
 
     /**
      * The product name to be shown on the title.
      *
      * @return the product name
      */
-    String name();
+    String getName();
 
     /**
      * The product description to be shown on the description.
      *
      * @return the product description
      */
-    String description();
+    String getDescription();
 
     /**
      * The image location path.
      *
      * @return the image metadata
      */
-    String image();
+    String getImage();
 
     /**
      * The price of unit of product.
@@ -42,7 +42,7 @@ public interface ProductV01 extends Serializable {
      *
      * @return the price
      */
-    BigInteger price();
+    BigInteger getPrice();
 
     /**
      * The category of product, e.g. books, computers, and so on.
@@ -51,14 +51,5 @@ public interface ProductV01 extends Serializable {
      *
      * @return the category
      */
-    String category();
-
-    /**
-     * The inventory where product is stores.
-     * <p>
-     * One inventory per product type.
-     *
-     * @return the inventory
-     */
-    InventoryV01 inventory();
+    String getCategory();
 }
