@@ -10,12 +10,12 @@ import com._6core.platform.orderdomain.dto.OrderItemResponse;
 import com._6core.platform.orderdomain.dto.OrderRequest;
 import com._6core.platform.orderdomain.dto.OrderResponse;
 import com._6core.platform.orderdomain.mapper.OrderMapper;
-import com._6core.platform.orderdomain.service.correctness.OrderItemsCorrect;
-import com._6core.platform.orderdomain.service.correctness.OrderTotalCorrect;
-import com._6core.platform.orderdomain.service.duplicate.OrderDuplicateContext;
-import com._6core.platform.orderdomain.service.duplicate.OrderIDDuplicateStrategy;
-import com._6core.platform.orderdomain.service.duplicate.StatusDuplicateStrategy;
-import com._6core.platform.orderdomain.service.helper.OrderHelperService;
+import com._6core.platform.orderdomain.service.correctness.ItemsCorrectOrderStrategy;
+import com._6core.platform.orderdomain.service.correctness.TotalCorrectOrderStrategy;
+import com._6core.platform.orderdomain.service.duplicate.DuplicateOrderContext;
+import com._6core.platform.orderdomain.service.duplicate.IDDuplicateOrderStrategy;
+import com._6core.platform.orderdomain.service.duplicate.StatusDuplicateOrderStrategy;
+import com._6core.platform.orderdomain.service.helper.CreateOrderHelperService;
 import java.math.BigInteger;
 import java.util.Set;
 import org.junit.jupiter.api.Assertions;
@@ -27,20 +27,20 @@ import org.mockito.MockitoAnnotations;
 import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
 
-public class OrderCreateServiceTest {
-  @Mock private OrderIDDuplicateStrategy orderIdDuplicateStrategy;
+public class CreateOrderUseCaseServiceTest {
+  @Mock private IDDuplicateOrderStrategy orderIdDuplicateStrategy;
 
-  @Mock private StatusDuplicateStrategy statusDuplicateStrategy;
+  @Mock private StatusDuplicateOrderStrategy statusDuplicateStrategy;
 
-  @Mock private OrderTotalCorrect orderTotalCorrect;
+  @Mock private TotalCorrectOrderStrategy orderTotalCorrect;
 
-  @Mock private OrderItemsCorrect orderItemsCorrect;
+  @Mock private ItemsCorrectOrderStrategy orderItemsCorrect;
 
   @Mock private CreateOrderPersistencePort createOrderPersistencePort;
 
-  @Mock private OrderHelperService orderHelperService;
+  @Mock private CreateOrderHelperService createOrderHelperService;
   @Mock private OrderMapper mapper;
-  @InjectMocks private OrderCreateService orderCreateService;
+  @InjectMocks private CreateOrderUseCaseService orderCreateUseCaseService;
   private OrderRequest request;
   private ImmutableOrderV01Impl.Builder orderBuilder;
   private OrderResponse response;
@@ -75,8 +75,8 @@ public class OrderCreateServiceTest {
     }
 
     MockitoAnnotations.initMocks(this);
-    orderCreateService =
-        new OrderCreateService(
+    orderCreateUseCaseService =
+        new CreateOrderUseCaseService(
             orderIdDuplicateStrategy,
             statusDuplicateStrategy,
             orderTotalCorrect,
@@ -89,14 +89,14 @@ public class OrderCreateServiceTest {
   public void createOrder_success() {
     ImmutableOrderV01Impl order = orderBuilder.build();
     when(mapper.mapToResponseDto(order)).thenReturn(response);
-    when(orderHelperService.getOrderById(request.orderId())).thenReturn(Mono.just(order));
+    when(createOrderHelperService.getOrderById(request.orderId())).thenReturn(Mono.just(order));
     when(orderIdDuplicateStrategy.isDuplicate(request)).thenReturn(false);
     when(statusDuplicateStrategy.isDuplicate(request)).thenReturn(false);
     when(orderItemsCorrect.isCorrect(request)).thenReturn(true);
     when(orderTotalCorrect.isCorrect(request)).thenReturn(true);
     when(createOrderPersistencePort.createOrder(request)).thenReturn(Mono.just(order));
 
-    orderCreateService
+    orderCreateUseCaseService
         .createOrder(request)
         .log()
         .as(StepVerifier::create)
@@ -112,11 +112,11 @@ public class OrderCreateServiceTest {
 
   @Test
   public void orderIdDuplicate_true() {
-    when(orderHelperService.getOrderById(request.orderId()))
+    when(createOrderHelperService.getOrderById(request.orderId()))
         .thenReturn(Mono.just(orderBuilder.build()));
-    OrderIDDuplicateStrategy strategy = new OrderIDDuplicateStrategy(orderHelperService);
+    IDDuplicateOrderStrategy strategy = new IDDuplicateOrderStrategy(createOrderHelperService);
 
-    OrderDuplicateContext<OrderRequest> context = new OrderDuplicateContext<>();
+    DuplicateOrderContext<OrderRequest> context = new DuplicateOrderContext<>();
     context.setStrategy(strategy);
     Assertions.assertTrue(context.executeStrategy(request));
   }
@@ -131,10 +131,10 @@ public class OrderCreateServiceTest {
     OrderRequest request1 =
         new OrderRequest("order345", "new", BigInteger.valueOf(250), orderItems);
 
-    when(orderHelperService.getOrderById(request1.orderId())).thenReturn(Mono.empty());
-    OrderIDDuplicateStrategy strategy = new OrderIDDuplicateStrategy(orderHelperService);
+    when(createOrderHelperService.getOrderById(request1.orderId())).thenReturn(Mono.empty());
+    IDDuplicateOrderStrategy strategy = new IDDuplicateOrderStrategy(createOrderHelperService);
 
-    OrderDuplicateContext<OrderRequest> context = new OrderDuplicateContext<>();
+    DuplicateOrderContext<OrderRequest> context = new DuplicateOrderContext<>();
     context.setStrategy(strategy);
 
     Assertions.assertFalse(context.executeStrategy(request1));
@@ -164,12 +164,12 @@ public class OrderCreateServiceTest {
       orderBuilder.addOrderItems(itemBuilder.build());
     }
 
-    when(orderHelperService.getOrderByIdAndStatus(order.orderId(), order.status()))
+    when(createOrderHelperService.getOrderByIdAndStatus(order.orderId(), order.status()))
         .thenReturn(Mono.just(orderBuilder.build()));
 
-    StatusDuplicateStrategy strategy = new StatusDuplicateStrategy(orderHelperService);
+    StatusDuplicateOrderStrategy strategy = new StatusDuplicateOrderStrategy(createOrderHelperService);
 
-    OrderDuplicateContext<OrderRequest> context = new OrderDuplicateContext<>();
+    DuplicateOrderContext<OrderRequest> context = new DuplicateOrderContext<>();
     context.setStrategy(strategy);
 
     Assertions.assertTrue(strategy.isDuplicate(order));
@@ -184,12 +184,12 @@ public class OrderCreateServiceTest {
     Set<OrderItemRequest> orderItems = Set.of(item1, item2);
     OrderRequest order = new OrderRequest("order345", "new", BigInteger.valueOf(250), orderItems);
 
-    when(orderHelperService.getOrderByIdAndStatus(order.orderId(), order.status()))
+    when(createOrderHelperService.getOrderByIdAndStatus(order.orderId(), order.status()))
         .thenReturn(Mono.empty());
 
-    StatusDuplicateStrategy strategy = new StatusDuplicateStrategy(orderHelperService);
+    StatusDuplicateOrderStrategy strategy = new StatusDuplicateOrderStrategy(createOrderHelperService);
 
-    OrderDuplicateContext<OrderRequest> context = new OrderDuplicateContext<>();
+    DuplicateOrderContext<OrderRequest> context = new DuplicateOrderContext<>();
     context.setStrategy(strategy);
 
     Assertions.assertFalse(strategy.isDuplicate(order));

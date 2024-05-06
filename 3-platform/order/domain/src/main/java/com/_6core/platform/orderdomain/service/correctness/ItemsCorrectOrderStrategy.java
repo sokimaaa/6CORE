@@ -1,10 +1,12 @@
 package com._6core.platform.orderdomain.service.correctness;
 
+import com._6core.lib.hexagonal.annotations.DomainService;
 import com._6core.platform.orderdomain.dto.OrderRequest;
 import java.math.BigInteger;
 import java.util.Objects;
 
-public class OrderItemsCorrect implements OrderCorrectnessStrategy<OrderRequest> {
+@DomainService
+public class ItemsCorrectOrderStrategy implements CorrectnessOrderStrategy<OrderRequest> {
   @Override
   public boolean isCorrect(OrderRequest request) {
     return request.orderItems().stream()

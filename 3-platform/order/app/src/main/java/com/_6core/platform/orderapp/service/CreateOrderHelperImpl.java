@@ -1,14 +1,16 @@
 package com._6core.platform.orderapp.service;
 
+import com._6core.lib.hexagonal.annotations.DomainService;
 import com._6core.lib.java.domain.model.order.immutable.ImmutableOrderV01Impl;
 import com._6core.platform.orderapp.port.out.persistence.CreateOrderPersistencePort;
-import com._6core.platform.orderdomain.service.helper.OrderHelperService;
+import com._6core.platform.orderdomain.service.helper.CreateOrderHelperService;
 import reactor.core.publisher.Mono;
 
-public class OrderHelperImpl implements OrderHelperService {
+@DomainService
+public class CreateOrderHelperImpl implements CreateOrderHelperService {
   private final CreateOrderPersistencePort createOrderPersistencePort;
 
-  public OrderHelperImpl(CreateOrderPersistencePort createOrderPersistencePort) {
+  public CreateOrderHelperImpl(CreateOrderPersistencePort createOrderPersistencePort) {
     this.createOrderPersistencePort = createOrderPersistencePort;
   }
 

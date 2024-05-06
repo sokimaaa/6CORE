@@ -1,12 +1,14 @@
 package com._6core.platform.orderdomain.service.duplicate;
 
+import com._6core.lib.hexagonal.annotations.DomainService;
 import com._6core.platform.orderdomain.dto.OrderRequest;
-import com._6core.platform.orderdomain.service.helper.OrderHelperService;
+import com._6core.platform.orderdomain.service.helper.CreateOrderHelperService;
 
-public class StatusDuplicateStrategy implements OrderDuplicateStrategy<OrderRequest> {
-  private final OrderHelperService orderHelper;
+@DomainService
+public class StatusDuplicateOrderStrategy implements DuplicateOrderStrategy<OrderRequest> {
+  private final CreateOrderHelperService orderHelper;
 
-  public StatusDuplicateStrategy(OrderHelperService orderHelper) {
+  public StatusDuplicateOrderStrategy(CreateOrderHelperService orderHelper) {
     this.orderHelper = orderHelper;
   }
 

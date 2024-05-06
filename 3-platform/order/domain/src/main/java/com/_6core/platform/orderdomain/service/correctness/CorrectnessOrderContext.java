@@ -1,9 +1,9 @@
 package com._6core.platform.orderdomain.service.correctness;
 
-public class OrderCorrectnessContext<T> {
-  private OrderCorrectnessStrategy<T> strategy;
+public class CorrectnessOrderContext<T> {
+  private CorrectnessOrderStrategy<T> strategy;
 
-  public void setStrategy(OrderCorrectnessStrategy<T> strategy) {
+  public void setStrategy(CorrectnessOrderStrategy<T> strategy) {
     this.strategy = strategy;
   }
 

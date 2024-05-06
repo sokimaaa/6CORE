@@ -1,10 +1,12 @@
 package com._6core.platform.orderdomain.service.correctness;
 
+import com._6core.lib.hexagonal.annotations.DomainService;
 import com._6core.platform.orderdomain.dto.OrderItemRequest;
 import com._6core.platform.orderdomain.dto.OrderRequest;
 import java.math.BigInteger;
 
-public class OrderTotalCorrect implements OrderCorrectnessStrategy<OrderRequest> {
+@DomainService
+public class TotalCorrectOrderStrategy implements CorrectnessOrderStrategy<OrderRequest> {
   @Override
   public boolean isCorrect(OrderRequest request) {
     BigInteger summa = BigInteger.ZERO;

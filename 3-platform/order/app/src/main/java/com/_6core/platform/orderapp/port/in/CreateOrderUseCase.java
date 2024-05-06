@@ -4,6 +4,6 @@ import com._6core.platform.orderdomain.dto.OrderRequest;
 import com._6core.platform.orderdomain.dto.OrderResponse;
 import reactor.core.publisher.Mono;
 
-public interface OrderCreateUseCase {
+public interface CreateOrderUseCase {
   public Mono<OrderResponse> createOrder(OrderRequest request);
 }

@@ -1,30 +1,32 @@
 package com._6core.platform.orderapp.service;
 
+import com._6core.lib.hexagonal.annotations.UseCase;
 import com._6core.lib.java.domain.model.order.immutable.ImmutableOrderV01Impl;
-import com._6core.platform.orderapp.port.in.OrderCreateUseCase;
+import com._6core.platform.orderapp.port.in.CreateOrderUseCase;
 import com._6core.platform.orderapp.port.out.persistence.CreateOrderPersistencePort;
 import com._6core.platform.orderdomain.dto.OrderRequest;
 import com._6core.platform.orderdomain.dto.OrderResponse;
 import com._6core.platform.orderdomain.mapper.OrderMapper;
-import com._6core.platform.orderdomain.service.correctness.OrderCorrectnessContext;
-import com._6core.platform.orderdomain.service.correctness.OrderCorrectnessStrategy;
-import com._6core.platform.orderdomain.service.correctness.OrderItemsCorrect;
-import com._6core.platform.orderdomain.service.correctness.OrderTotalCorrect;
-import com._6core.platform.orderdomain.service.duplicate.OrderDuplicateContext;
-import com._6core.platform.orderdomain.service.duplicate.OrderDuplicateStrategy;
-import com._6core.platform.orderdomain.service.duplicate.OrderIDDuplicateStrategy;
-import com._6core.platform.orderdomain.service.duplicate.StatusDuplicateStrategy;
+import com._6core.platform.orderdomain.service.correctness.CorrectnessOrderContext;
+import com._6core.platform.orderdomain.service.correctness.CorrectnessOrderStrategy;
+import com._6core.platform.orderdomain.service.correctness.ItemsCorrectOrderStrategy;
+import com._6core.platform.orderdomain.service.correctness.TotalCorrectOrderStrategy;
+import com._6core.platform.orderdomain.service.duplicate.DuplicateOrderContext;
+import com._6core.platform.orderdomain.service.duplicate.DuplicateOrderStrategy;
+import com._6core.platform.orderdomain.service.duplicate.IDDuplicateOrderStrategy;
+import com._6core.platform.orderdomain.service.duplicate.StatusDuplicateOrderStrategy;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import reactor.core.publisher.Mono;
 
+@UseCase
 @RequiredArgsConstructor
-public class OrderCreateService implements OrderCreateUseCase {
-  private final OrderIDDuplicateStrategy orderIdDuplicateStrategy;
-  private final StatusDuplicateStrategy statusDuplicateStrategy;
-  private final OrderTotalCorrect orderTotalCorrect;
-  private final OrderItemsCorrect orderItemsCorrect;
+public class CreateOrderUseCaseService implements CreateOrderUseCase {
+  private final IDDuplicateOrderStrategy orderIdDuplicateStrategy;
+  private final StatusDuplicateOrderStrategy statusDuplicateStrategy;
+  private final TotalCorrectOrderStrategy orderTotalCorrect;
+  private final ItemsCorrectOrderStrategy orderItemsCorrect;
   private final CreateOrderPersistencePort createOrderPersistencePort;
   private final OrderMapper mapper;
 
@@ -42,12 +44,12 @@ public class OrderCreateService implements OrderCreateUseCase {
   }
 
   public boolean orderDuplicateChecker(OrderRequest request) {
-    OrderDuplicateContext<OrderRequest> duplicateContext = new OrderDuplicateContext<>();
-    List<OrderDuplicateStrategy<OrderRequest>> strategies = new ArrayList<>();
+    DuplicateOrderContext<OrderRequest> duplicateContext = new DuplicateOrderContext<>();
+    List<DuplicateOrderStrategy<OrderRequest>> strategies = new ArrayList<>();
     strategies.add(orderIdDuplicateStrategy);
     strategies.add(statusDuplicateStrategy);
 
-    for (OrderDuplicateStrategy<OrderRequest> strategy : strategies) {
+    for (DuplicateOrderStrategy<OrderRequest> strategy : strategies) {
       duplicateContext.setStrategy(strategy);
       if (duplicateContext.executeStrategy(request)) {
         return true;
@@ -57,12 +59,12 @@ public class OrderCreateService implements OrderCreateUseCase {
   }
 
   public boolean orderCorrectness(OrderRequest request) {
-    OrderCorrectnessContext<OrderRequest> correctnessContext = new OrderCorrectnessContext<>();
-    List<OrderCorrectnessStrategy<OrderRequest>> strategies = new ArrayList<>();
+    CorrectnessOrderContext<OrderRequest> correctnessContext = new CorrectnessOrderContext<>();
+    List<CorrectnessOrderStrategy<OrderRequest>> strategies = new ArrayList<>();
     strategies.add(orderItemsCorrect);
     strategies.add(orderTotalCorrect);
 
-    for (OrderCorrectnessStrategy<OrderRequest> strategy : strategies) {
+    for (CorrectnessOrderStrategy<OrderRequest> strategy : strategies) {
       correctnessContext.setStrategy(strategy);
       if (correctnessContext.executeStrategy(request)) {
         return true;
