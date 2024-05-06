@@ -36,6 +36,7 @@
     <dependency>
       <groupId>com.6core.lib</groupId>
       <artifactId>unit-test-bundle</artifactId>
+      <version>${project.parent.version}</version>
     </dependency>
   </dependencies>
 </project>
