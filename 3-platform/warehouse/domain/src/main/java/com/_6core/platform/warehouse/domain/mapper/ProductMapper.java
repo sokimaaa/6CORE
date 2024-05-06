@@ -5,7 +5,6 @@ import com._6core.platform.warehouse.domain.dto.product.ProductResponse;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
-import org.reactivestreams.Publisher;
 
 @Mapper
 public interface ProductMapper {
