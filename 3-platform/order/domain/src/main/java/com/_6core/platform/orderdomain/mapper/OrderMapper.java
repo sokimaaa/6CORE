@@ -1,14 +1,12 @@
 package com._6core.platform.orderdomain.mapper;
 
 import com._6core.lib.java.domain.model.order.OrderItemV01;
-import com._6core.lib.java.domain.model.order.OrderV01;
 import com._6core.lib.java.domain.model.order.immutable.ImmutableOrderItemV01Impl;
 import com._6core.lib.java.domain.model.order.immutable.ImmutableOrderV01Impl;
 import com._6core.platform.orderdomain.dto.OrderItemRequest;
 import com._6core.platform.orderdomain.dto.OrderItemResponse;
 import com._6core.platform.orderdomain.dto.OrderRequest;
 import com._6core.platform.orderdomain.dto.OrderResponse;
-
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -25,7 +23,7 @@ public interface OrderMapper {
 
   OrderMapper INSTANCE = Mappers.getMapper(OrderMapper.class);
 
-  @Mapping(target = "orderId" , expression = "java(order.orderId())")
+  @Mapping(target = "orderId", expression = "java(order.orderId())")
   @Mapping(target = "status", expression = "java(order.status())")
   @Mapping(target = "total", expression = "java(order.total())")
   @Mapping(target = "orderItems", expression = "java(mapToOrderItemResponse(order.orderItems()))")
@@ -33,9 +31,9 @@ public interface OrderMapper {
 
   default Mono<OrderResponse> mapToResponseDto(Mono<ImmutableOrderV01Impl> orderMono) {
 
-    return orderMono.map(this::mapToResponseDto)
-            .defaultIfEmpty(new OrderResponse("","", BigInteger.ZERO,null));
-
+    return orderMono
+        .map(this::mapToResponseDto)
+        .defaultIfEmpty(new OrderResponse("", "", BigInteger.ZERO, null));
   }
 
   @Mapping(target = "orderItems", source = "orderItems", qualifiedByName = "mapOrderItemRequests")
@@ -60,11 +58,12 @@ public interface OrderMapper {
   }
 
   @Named("mapToOrderItemResponse")
-  default Set<OrderItemResponse> mapToOrderItemResponse(
-      Set<OrderItemV01> orderItems) {
+  default Set<OrderItemResponse> mapToOrderItemResponse(Set<OrderItemV01> orderItems) {
     Set<OrderItemResponse> orderItemResponses = new HashSet<>();
     for (OrderItemV01 orderItem : orderItems) {
-      OrderItemResponse item = new OrderItemResponse(orderItem.orderId(),
+      OrderItemResponse item =
+          new OrderItemResponse(
+              orderItem.orderId(),
               orderItem.itemId(),
               orderItem.quantity(),
               orderItem.price(),

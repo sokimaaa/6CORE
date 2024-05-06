@@ -4,11 +4,10 @@ import com._6core.lib.java.domain.model.order.immutable.ImmutableOrderItemV01Imp
 import com._6core.lib.java.domain.model.order.immutable.ImmutableOrderV01Impl;
 import com._6core.platform.orderdomain.dto.OrderItemRequest;
 import com._6core.platform.orderdomain.dto.OrderRequest;
-import com._6core.platform.orderdomain.dto.OrderResponse;
 import java.math.BigInteger;
 import java.util.Set;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
@@ -41,25 +40,25 @@ public class OrderMapperTest {
       itemBuilder.productId(item.productId());
       orderBuilder.addOrderItems(itemBuilder.build());
     }
-
-
   }
-
 
   @Test
   public void MapToOrderResponse_ok() {
     ImmutableOrderV01Impl order = orderBuilder.build();
     Mono<ImmutableOrderV01Impl> orderMono = Mono.just(order);
 
-    mapper.INSTANCE.mapToResponseDto(orderMono)
-            .log()
-            .as(StepVerifier::create)
-            .consumeNextWith(response -> {
-              Assertions.assertEquals(response.orderId(),order.orderId());
-              Assertions.assertEquals(response.status(),order.status());
-              Assertions.assertEquals(response.total(),order.total());
+    mapper
+        .INSTANCE
+        .mapToResponseDto(orderMono)
+        .log()
+        .as(StepVerifier::create)
+        .consumeNextWith(
+            response -> {
+              Assertions.assertEquals(response.orderId(), order.orderId());
+              Assertions.assertEquals(response.status(), order.status());
+              Assertions.assertEquals(response.total(), order.total());
             })
-            .verifyComplete();
+        .verifyComplete();
   }
 
   @Test

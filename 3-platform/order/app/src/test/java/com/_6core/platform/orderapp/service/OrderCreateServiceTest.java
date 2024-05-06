@@ -1,6 +1,7 @@
 package com._6core.platform.orderapp.service;
 
 import static org.mockito.Mockito.when;
+
 import com._6core.lib.java.domain.model.order.immutable.ImmutableOrderItemV01Impl;
 import com._6core.lib.java.domain.model.order.immutable.ImmutableOrderV01Impl;
 import com._6core.platform.orderapp.port.out.persistence.CreateOrderPersistencePort;
@@ -17,8 +18,8 @@ import com._6core.platform.orderdomain.service.duplicate.StatusDuplicateStrategy
 import com._6core.platform.orderdomain.service.helper.OrderHelperService;
 import java.math.BigInteger;
 import java.util.Set;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -51,9 +52,9 @@ public class OrderCreateServiceTest {
     OrderItemRequest item2 =
         new OrderItemRequest("item2", "1", 15, BigInteger.valueOf(150), "order123");
     OrderItemResponse item3 =
-            new OrderItemResponse("item1", "2", 10, BigInteger.valueOf(100), "order123");
+        new OrderItemResponse("item1", "2", 10, BigInteger.valueOf(100), "order123");
     OrderItemResponse item4 =
-            new OrderItemResponse("item2", "1", 15, BigInteger.valueOf(150), "order123");
+        new OrderItemResponse("item2", "1", 15, BigInteger.valueOf(150), "order123");
     Set<OrderItemRequest> orderItems = Set.of(item1, item2);
     Set<OrderItemResponse> orderItemsResponse = Set.of(item3, item4);
     request = new OrderRequest("order123", "new", BigInteger.valueOf(250), orderItems);
@@ -80,8 +81,8 @@ public class OrderCreateServiceTest {
             statusDuplicateStrategy,
             orderTotalCorrect,
             orderItemsCorrect,
-                createOrderPersistencePort,
-                mapper);
+            createOrderPersistencePort,
+            mapper);
   }
 
   @Test
