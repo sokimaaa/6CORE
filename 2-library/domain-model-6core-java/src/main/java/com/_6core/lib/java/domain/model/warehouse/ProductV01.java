@@ -52,13 +52,4 @@ public interface ProductV01 extends Serializable {
      * @return the category
      */
     String category();
-
-    /**
-     * The inventory where product is stores.
-     * <p>
-     * One inventory per product type.
-     *
-     * @return the inventory
-     */
-    InventoryV01 inventory();
 }

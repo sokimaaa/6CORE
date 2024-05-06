@@ -1,4 +1,4 @@
-package com._6core.platform.warehouse.domain.dto;
+package com._6core.platform.warehouse.domain.dto.product;
 
 import java.util.List;
 
