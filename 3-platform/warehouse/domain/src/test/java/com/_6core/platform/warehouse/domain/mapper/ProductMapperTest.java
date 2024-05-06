@@ -13,14 +13,15 @@ class ProductMapperTest {
 
   @Test
   public void mapToProductResponse_fullProductV01_validProductResponse() {
-    ProductV01 productV01 = ImmutableProductV01Impl.builder()
-      .productId("1")
-      .name("Product 1")
-      .description("Description 1")
-      .price(BigInteger.valueOf(10))
-      .image("image1.jpg")
-      .category("Category 1")
-      .build();
+    ProductV01 productV01 =
+        ImmutableProductV01Impl.builder()
+            .productId("1")
+            .name("Product 1")
+            .description("Description 1")
+            .price(BigInteger.valueOf(10))
+            .image("image1.jpg")
+            .category("Category 1")
+            .build();
     ProductResponse productResponse = ProductMapper.INSTANCE.mapToProductResponse(productV01);
     assertEquals(productV01.name(), productResponse.name());
     assertEquals(productV01.description(), productResponse.description());
