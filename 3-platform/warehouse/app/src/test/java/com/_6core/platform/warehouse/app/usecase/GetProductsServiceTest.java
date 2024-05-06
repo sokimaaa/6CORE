@@ -18,8 +18,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import reactor.core.publisher.Flux;
 import reactor.test.StepVerifier;
 
-
-
 @ExtendWith(MockitoExtension.class)
 class GetProductsServiceTest {
   @Mock private GetProductsPort getProductsPort;
