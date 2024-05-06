@@ -62,21 +62,21 @@ class GetProductsServiceTest {
         .as(StepVerifier::create)
         .consumeNextWith(
             productResponse -> {
-              assertEquals(product1.productId(), productResponse1.id());
-              assertEquals(product1.name(), productResponse1.name());
-              assertEquals(product1.description(), productResponse1.description());
-              assertEquals(product1.image(), productResponse1.image());
-              assertEquals(product1.price(), productResponse1.price());
-              assertEquals(product1.category(), productResponse1.category());
+              assertEquals(product1.getProductId(), productResponse1.id());
+              assertEquals(product1.getName(), productResponse1.name());
+              assertEquals(product1.getDescription(), productResponse1.description());
+              assertEquals(product1.getImage(), productResponse1.image());
+              assertEquals(product1.getPrice(), productResponse1.price());
+              assertEquals(product1.getCategory(), productResponse1.category());
             })
         .consumeNextWith(
             productResponse -> {
-              assertEquals(product2.productId(), productResponse2.id());
-              assertEquals(product2.name(), productResponse2.name());
-              assertEquals(product2.description(), productResponse2.description());
-              assertEquals(product2.image(), productResponse2.image());
-              assertEquals(product2.price(), productResponse2.price());
-              assertEquals(product2.category(), productResponse2.category());
+              assertEquals(product2.getProductId(), productResponse2.id());
+              assertEquals(product2.getName(), productResponse2.name());
+              assertEquals(product2.getDescription(), productResponse2.description());
+              assertEquals(product2.getImage(), productResponse2.image());
+              assertEquals(product2.getPrice(), productResponse2.price());
+              assertEquals(product2.getCategory(), productResponse2.category());
             })
         .verifyComplete();
   }

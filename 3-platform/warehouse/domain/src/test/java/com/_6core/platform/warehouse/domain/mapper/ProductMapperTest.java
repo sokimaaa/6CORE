@@ -21,11 +21,11 @@ class ProductMapperTest {
             .category("Category 1")
             .build();
     ProductResponse productResponse = ProductMapper.INSTANCE.mapToProductResponse(productV01);
-    assertEquals(productV01.productId(), productResponse.id());
-    assertEquals(productV01.name(), productResponse.name());
-    assertEquals(productV01.description(), productResponse.description());
-    assertEquals(productV01.image(), productResponse.image());
-    assertEquals(productV01.price(), productResponse.price());
-    assertEquals(productV01.category(), productResponse.category());
+    assertEquals(productV01.getProductId(), productResponse.id());
+    assertEquals(productV01.getName(), productResponse.name());
+    assertEquals(productV01.getDescription(), productResponse.description());
+    assertEquals(productV01.getImage(), productResponse.image());
+    assertEquals(productV01.getPrice(), productResponse.price());
+    assertEquals(productV01.getCategory(), productResponse.category());
   }
 }
