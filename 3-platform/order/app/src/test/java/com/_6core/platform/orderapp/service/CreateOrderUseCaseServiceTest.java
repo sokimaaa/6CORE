@@ -167,7 +167,8 @@ public class CreateOrderUseCaseServiceTest {
     when(createOrderHelperService.getOrderByIdAndStatus(order.orderId(), order.status()))
         .thenReturn(Mono.just(orderBuilder.build()));
 
-    StatusDuplicateOrderStrategy strategy = new StatusDuplicateOrderStrategy(createOrderHelperService);
+    StatusDuplicateOrderStrategy strategy =
+        new StatusDuplicateOrderStrategy(createOrderHelperService);
 
     DuplicateOrderContext<OrderRequest> context = new DuplicateOrderContext<>();
     context.setStrategy(strategy);
@@ -187,7 +188,8 @@ public class CreateOrderUseCaseServiceTest {
     when(createOrderHelperService.getOrderByIdAndStatus(order.orderId(), order.status()))
         .thenReturn(Mono.empty());
 
-    StatusDuplicateOrderStrategy strategy = new StatusDuplicateOrderStrategy(createOrderHelperService);
+    StatusDuplicateOrderStrategy strategy =
+        new StatusDuplicateOrderStrategy(createOrderHelperService);
 
     DuplicateOrderContext<OrderRequest> context = new DuplicateOrderContext<>();
     context.setStrategy(strategy);
