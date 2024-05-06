@@ -8,21 +8,21 @@ public interface InventoryV01 extends Serializable {
      *
      * @return the inventory id
      */
-    String inventoryId();
+    String getInventoryId();
 
     /**
      * The warehouse that accumulates this inventory.
      *
      * @return the warehouse
      */
-    WarehouseV01 warehouse();
+    WarehouseV01 getWarehouse();
 
     /**
      * The product that stores.
      *
      * @return the product
      */
-    ProductV01 product();
+    ProductV01 getProduct();
 
     /**
      * The actual quantity of a product.
@@ -32,7 +32,7 @@ public interface InventoryV01 extends Serializable {
      *
      * @return the actual quantity
      */
-    Integer actualQuantity();
+    Integer getActualQuantity();
 
     /**
      * The available quantity of a product for new reservations or purchases.
@@ -43,5 +43,5 @@ public interface InventoryV01 extends Serializable {
      *
      * @return the available quantity
      */
-    Integer availableQuantity();
+    Integer getAvailableQuantity();
 }

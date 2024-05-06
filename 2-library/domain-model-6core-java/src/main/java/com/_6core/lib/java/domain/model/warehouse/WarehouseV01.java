@@ -8,12 +8,12 @@ public interface WarehouseV01 extends Serializable {
      *
      * @return the warehouse id
      */
-    String warehouseId();
+    String getWarehouseId();
 
     /**
      * The address location of warehouse.
      *
      * @return the address
      */
-    String address();
+    String getAddress();
 }

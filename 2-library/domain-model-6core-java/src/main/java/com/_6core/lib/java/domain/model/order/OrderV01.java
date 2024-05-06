@@ -10,14 +10,14 @@ public interface OrderV01 extends Serializable {
      *
      * @return the order id
      */
-    String orderId();
+    String getOrderId();
 
     /**
      * The status of an order.
      *
      * @return the status
      */
-    String status();
+    String getStatus();
 
     /**
      * The total price of an order in integer format.
@@ -30,12 +30,12 @@ public interface OrderV01 extends Serializable {
      *
      * @return the total price
      */
-    BigInteger total();
+    BigInteger getTotal();
 
     /**
      * Bunch of order items that were ordered.
      *
      * @return the set of order items
      */
-    Set<OrderItemV01> orderItems();
+    Set<OrderItemV01> getOrderItems();
 }
