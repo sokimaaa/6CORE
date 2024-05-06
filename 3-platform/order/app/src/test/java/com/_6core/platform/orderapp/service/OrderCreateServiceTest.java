@@ -1,5 +1,6 @@
 package com._6core.platform.orderapp.service;
 
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import com._6core.lib.java.domain.model.order.immutable.ImmutableOrderItemV01Impl;
@@ -12,6 +13,8 @@ import com._6core.platform.orderdomain.dto.OrderResponse;
 import com._6core.platform.orderdomain.mapper.OrderMapper;
 import com._6core.platform.orderdomain.service.correctness.OrderItemsCorrect;
 import com._6core.platform.orderdomain.service.correctness.OrderTotalCorrect;
+import com._6core.platform.orderdomain.service.duplicate.OrderDuplicateContext;
+import com._6core.platform.orderdomain.service.duplicate.OrderDuplicateStrategy;
 import com._6core.platform.orderdomain.service.duplicate.OrderIDDuplicateStrategy;
 import com._6core.platform.orderdomain.service.duplicate.StatusDuplicateStrategy;
 import com._6core.platform.orderdomain.service.helper.OrderHelperService;
@@ -44,6 +47,7 @@ public class OrderCreateServiceTest {
   private OrderResponse response;
   private OrderRequest request;
   private ImmutableOrderV01Impl.Builder orderBuilder;
+  private OrderDuplicateContext orderDuplicateChecker;
 
   @Before
   public void setup() {
@@ -109,4 +113,34 @@ public class OrderCreateServiceTest {
             })
         .verifyComplete();
   }
+
+  @Test
+  public void testOrderIdDuplicateOK() {
+    when(orderHelperService.getOrderById(request.orderId())).thenReturn(Mono.just(orderBuilder.build()));
+    OrderIDDuplicateStrategy strategy = new OrderIDDuplicateStrategy(orderHelperService);
+
+    OrderDuplicateContext<OrderRequest> context = new OrderDuplicateContext<>();
+    context.setStrategy(strategy);
+    Assertions.assertTrue(context.executeStrategy(request));
+  }
+
+  @Test
+  public void testOrderIdDuplicateFalse() {
+    OrderItemRequest item1 =
+            new OrderItemRequest("item1", "2", 10, BigInteger.valueOf(100), "order123");
+    OrderItemRequest item2 =
+            new OrderItemRequest("item2", "1", 15, BigInteger.valueOf(150), "order123");
+    Set<OrderItemRequest> orderItems = Set.of(item1, item2);
+    OrderRequest request1 = new OrderRequest("order345", "new", BigInteger.valueOf(250), orderItems);
+
+    when(orderHelperService.getOrderById(request1.orderId())).thenReturn(Mono.empty());
+    OrderIDDuplicateStrategy strategy = new OrderIDDuplicateStrategy(orderHelperService);
+
+    OrderDuplicateContext<OrderRequest> context = new OrderDuplicateContext<>();
+    context.setStrategy(strategy);
+
+    Assertions.assertFalse(context.executeStrategy(request1));
+
+  }
+
 }
