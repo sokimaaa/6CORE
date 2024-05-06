@@ -4,9 +4,8 @@ import com._6core.lib.java.domain.model.order.OrderItemV01;
 import com._6core.lib.java.domain.model.order.immutable.ImmutableOrderItemV01Impl;
 import com._6core.lib.java.domain.model.order.immutable.ImmutableOrderV01Impl;
 import com._6core.platform.orderdomain.dto.OrderItemRequest;
-import com._6core.platform.orderdomain.dto.OrderItemResponse;
 import com._6core.platform.orderdomain.dto.OrderRequest;
-import com._6core.platform.orderdomain.dto.OrderResponse;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -19,11 +18,6 @@ import org.mapstruct.factory.Mappers;
 @Mapper
 public interface OrderMapper {
   OrderMapper INSTANCE = Mappers.getMapper(OrderMapper.class);
-
-  OrderResponse mapToResponseDto(OrderRequest request);
-
-  @Mapping(target = "orderItems", source = "orderItems", qualifiedByName = "mapOrderItemResponse")
-  ImmutableOrderV01Impl mapToOrderV01(OrderResponse response);
 
   @Mapping(target = "orderItems", source = "orderItems", qualifiedByName = "mapOrderItemRequests")
   ImmutableOrderV01Impl mapToObject(OrderRequest request);
@@ -40,24 +34,6 @@ public interface OrderMapper {
               .quantity(itemRequest.quantity())
               .productId(itemRequest.productId())
               .price(itemRequest.price())
-              .build();
-      orderItems.add(item);
-    }
-    return orderItems;
-  }
-
-  @Named("mapOrderItemResponse")
-  default Iterable<? extends OrderItemV01> mapOrderItemResponse(
-      Set<OrderItemResponse> orderItemResponses) {
-    Set<OrderItemV01> orderItems = new HashSet<>();
-    for (OrderItemResponse itemResponse : orderItemResponses) {
-      ImmutableOrderItemV01Impl item =
-          ImmutableOrderItemV01Impl.builder()
-              .orderId(itemResponse.orderId())
-              .itemId(itemResponse.itemId())
-              .quantity(itemResponse.quantity())
-              .productId(itemResponse.productId())
-              .price(itemResponse.price())
               .build();
       orderItems.add(item);
     }

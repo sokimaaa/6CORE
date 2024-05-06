@@ -4,7 +4,7 @@ import com._6core.lib.java.domain.model.order.OrderV01;
 import com._6core.platform.orderdomain.dto.OrderRequest;
 import reactor.core.publisher.Mono;
 
-public interface OrderRepository {
+public interface CreateOrderPort {
 
   Mono<OrderV01> createOrder(OrderRequest order);
 

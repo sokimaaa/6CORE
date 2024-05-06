@@ -3,19 +3,17 @@ package com._6core.platform.orderdomain.mapper;
 import com._6core.lib.java.domain.model.order.immutable.ImmutableOrderV01Impl;
 import com._6core.platform.orderdomain.dto.OrderItemRequest;
 import com._6core.platform.orderdomain.dto.OrderRequest;
-import com._6core.platform.orderdomain.dto.OrderResponse;
 import java.math.BigInteger;
 import java.util.Set;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class OrderMapperTest {
-
   private OrderMapper mapper;
   private OrderRequest request;
 
-  @Before
+  @BeforeEach
   public void setup() {
     OrderItemRequest item1 =
         new OrderItemRequest("item1", "2", 10, BigInteger.valueOf(100), "order123");
@@ -25,19 +23,9 @@ public class OrderMapperTest {
     request = new OrderRequest("order123", "pending", BigInteger.valueOf(250), orderItems);
   }
 
-  @Test
-  public void testMapToOrderResponse() {
-
-    OrderResponse response = mapper.INSTANCE.mapToResponseDto(request);
-
-    Assertions.assertEquals(request.orderId(), response.orderId());
-    Assertions.assertEquals(request.status(), response.status());
-    Assertions.assertEquals(request.total(), response.total());
-    Assertions.assertEquals(request.orderItems().size(), response.orderItems().size());
-  }
 
   @Test
-  public void testMapToOrderV01() {
+  public void mapToOrderV01_complete() {
     OrderItemRequest item1 =
         new OrderItemRequest("item1", "2", 10, BigInteger.valueOf(100), "order123");
     OrderItemRequest item2 =
