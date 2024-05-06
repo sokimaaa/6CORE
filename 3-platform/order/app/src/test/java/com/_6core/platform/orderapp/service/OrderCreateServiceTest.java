@@ -145,12 +145,11 @@ public class OrderCreateServiceTest {
   @Test
   public void StatusAndIdDuplicateOk() {
     OrderItemRequest item1 =
-            new OrderItemRequest("item1", "2", 10, BigInteger.valueOf(100), "order123");
+        new OrderItemRequest("item1", "2", 10, BigInteger.valueOf(100), "order123");
     OrderItemRequest item2 =
-            new OrderItemRequest("item2", "1", 15, BigInteger.valueOf(150), "order123");
+        new OrderItemRequest("item2", "1", 15, BigInteger.valueOf(150), "order123");
     Set<OrderItemRequest> orderItems = Set.of(item1, item2);
-    OrderRequest order =
-            new OrderRequest("order345", "new", BigInteger.valueOf(250), orderItems);
+    OrderRequest order = new OrderRequest("order345", "new", BigInteger.valueOf(250), orderItems);
 
     orderBuilder = ImmutableOrderV01Impl.builder();
     orderBuilder.orderId(order.orderId());
@@ -168,7 +167,7 @@ public class OrderCreateServiceTest {
     }
 
     when(orderHelperService.getOrderByIdAndStatus(order.orderId(), order.status()))
-            .thenReturn(Mono.just(orderBuilder.build()));
+        .thenReturn(Mono.just(orderBuilder.build()));
 
     StatusDuplicateStrategy strategy = new StatusDuplicateStrategy(orderHelperService);
 
@@ -181,15 +180,14 @@ public class OrderCreateServiceTest {
   @Test
   public void StatusAndIdDuplicateFalse() {
     OrderItemRequest item1 =
-            new OrderItemRequest("item1", "2", 10, BigInteger.valueOf(100), "order123");
+        new OrderItemRequest("item1", "2", 10, BigInteger.valueOf(100), "order123");
     OrderItemRequest item2 =
-            new OrderItemRequest("item2", "1", 15, BigInteger.valueOf(150), "order123");
+        new OrderItemRequest("item2", "1", 15, BigInteger.valueOf(150), "order123");
     Set<OrderItemRequest> orderItems = Set.of(item1, item2);
-    OrderRequest order =
-            new OrderRequest("order345", "new", BigInteger.valueOf(250), orderItems);
+    OrderRequest order = new OrderRequest("order345", "new", BigInteger.valueOf(250), orderItems);
 
     when(orderHelperService.getOrderByIdAndStatus(order.orderId(), order.status()))
-            .thenReturn(Mono.empty());
+        .thenReturn(Mono.empty());
 
     StatusDuplicateStrategy strategy = new StatusDuplicateStrategy(orderHelperService);
 
