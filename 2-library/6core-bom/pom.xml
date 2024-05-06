@@ -41,6 +41,13 @@
         <artifactId>java-domain-model</artifactId>
         <version>0.0.1-SNAPSHOT</version>
       </dependency>
+
+	  <dependency>
+        <groupId>com.6core.lib</groupId>
+        <artifactId>proto-domain-model</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+      </dependency>
+
       <dependency>
         <groupId>com.6core.lib</groupId>
         <artifactId>hexagonal-annotations</artifactId>
@@ -68,12 +75,6 @@
       <dependency>
         <groupId>com.6core.lib</groupId>
         <artifactId>reactive-postges-persistent</artifactId>
-        <version>0.0.1-SNAPSHOT</version>
-      </dependency>
-
-      <dependency>
-        <groupId>com.6core.lib</groupId>
-        <artifactId>proto-domain-model</artifactId>
         <version>0.0.1-SNAPSHOT</version>
       </dependency>
 
