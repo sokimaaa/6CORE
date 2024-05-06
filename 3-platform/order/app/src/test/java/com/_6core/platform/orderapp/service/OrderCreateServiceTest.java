@@ -141,4 +141,61 @@ public class OrderCreateServiceTest {
 
     Assertions.assertFalse(context.executeStrategy(request1));
   }
+
+  @Test
+  public void StatusAndIdDuplicateOk() {
+    OrderItemRequest item1 =
+            new OrderItemRequest("item1", "2", 10, BigInteger.valueOf(100), "order123");
+    OrderItemRequest item2 =
+            new OrderItemRequest("item2", "1", 15, BigInteger.valueOf(150), "order123");
+    Set<OrderItemRequest> orderItems = Set.of(item1, item2);
+    OrderRequest order =
+            new OrderRequest("order345", "new", BigInteger.valueOf(250), orderItems);
+
+    orderBuilder = ImmutableOrderV01Impl.builder();
+    orderBuilder.orderId(order.orderId());
+    orderBuilder.status(order.status());
+    orderBuilder.total(order.total());
+
+    for (OrderItemRequest item : orderItems) {
+      ImmutableOrderItemV01Impl.Builder itemBuilder = ImmutableOrderItemV01Impl.builder();
+      itemBuilder.orderId(order.orderId());
+      itemBuilder.price(item.price());
+      itemBuilder.quantity(item.quantity());
+      itemBuilder.itemId(item.itemId());
+      itemBuilder.productId(item.productId());
+      orderBuilder.addOrderItems(itemBuilder.build());
+    }
+
+    when(orderHelperService.getOrderByIdAndStatus(order.orderId(), order.status()))
+            .thenReturn(Mono.just(orderBuilder.build()));
+
+    StatusDuplicateStrategy strategy = new StatusDuplicateStrategy(orderHelperService);
+
+    OrderDuplicateContext<OrderRequest> context = new OrderDuplicateContext<>();
+    context.setStrategy(strategy);
+
+    Assertions.assertTrue(strategy.isDuplicate(order));
+  }
+
+  @Test
+  public void StatusAndIdDuplicateFalse() {
+    OrderItemRequest item1 =
+            new OrderItemRequest("item1", "2", 10, BigInteger.valueOf(100), "order123");
+    OrderItemRequest item2 =
+            new OrderItemRequest("item2", "1", 15, BigInteger.valueOf(150), "order123");
+    Set<OrderItemRequest> orderItems = Set.of(item1, item2);
+    OrderRequest order =
+            new OrderRequest("order345", "new", BigInteger.valueOf(250), orderItems);
+
+    when(orderHelperService.getOrderByIdAndStatus(order.orderId(), order.status()))
+            .thenReturn(Mono.empty());
+
+    StatusDuplicateStrategy strategy = new StatusDuplicateStrategy(orderHelperService);
+
+    OrderDuplicateContext<OrderRequest> context = new OrderDuplicateContext<>();
+    context.setStrategy(strategy);
+
+    Assertions.assertFalse(strategy.isDuplicate(order));
+  }
 }
