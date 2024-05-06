@@ -10,6 +10,7 @@ import org.mapstruct.factory.Mappers;
 public interface ProductMapper {
   ProductMapper INSTANCE = Mappers.getMapper(ProductMapper.class);
 
+  @Mapping(target = "id", expression = "java(productV01.productId())")
   @Mapping(target = "name", expression = "java(productV01.name())")
   @Mapping(target = "description", expression = "java(productV01.description())")
   @Mapping(target = "image", expression = "java(productV01.image())")

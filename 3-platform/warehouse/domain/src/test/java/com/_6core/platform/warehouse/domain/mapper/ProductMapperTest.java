@@ -21,6 +21,7 @@ class ProductMapperTest {
             .category("Category 1")
             .build();
     ProductResponse productResponse = ProductMapper.INSTANCE.mapToProductResponse(productV01);
+    assertEquals(productV01.productId(), productResponse.id());
     assertEquals(productV01.name(), productResponse.name());
     assertEquals(productV01.description(), productResponse.description());
     assertEquals(productV01.image(), productResponse.image());

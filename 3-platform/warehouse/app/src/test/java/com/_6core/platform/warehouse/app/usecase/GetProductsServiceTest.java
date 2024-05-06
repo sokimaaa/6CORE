@@ -50,10 +50,10 @@ class GetProductsServiceTest {
     when(getProductsPort.getProductsByIds(productIds)).thenReturn(Flux.just(product1, product2));
     ProductResponse productResponse1 =
         new ProductResponse(
-            "Product 1", "Description 1", "image1.jpg", new BigInteger("10"), "Category 1");
+            "1", "Product 1", "Description 1", "image1.jpg", new BigInteger("10"), "Category 1");
     ProductResponse productResponse2 =
         new ProductResponse(
-            "Product 2", "Description 2", "image2.jpg", new BigInteger("20"), "Category 2");
+            "2", "Product 2", "Description 2", "image2.jpg", new BigInteger("20"), "Category 2");
     when(productMapper.mapToProductResponse(product1)).thenReturn(productResponse1);
     when(productMapper.mapToProductResponse(product2)).thenReturn(productResponse2);
     getProductsService
@@ -62,6 +62,7 @@ class GetProductsServiceTest {
         .as(StepVerifier::create)
         .consumeNextWith(
             productResponse -> {
+              assertEquals(product1.productId(), productResponse1.id());
               assertEquals(product1.name(), productResponse1.name());
               assertEquals(product1.description(), productResponse1.description());
               assertEquals(product1.image(), productResponse1.image());
@@ -70,6 +71,7 @@ class GetProductsServiceTest {
             })
         .consumeNextWith(
             productResponse -> {
+              assertEquals(product2.productId(), productResponse2.id());
               assertEquals(product2.name(), productResponse2.name());
               assertEquals(product2.description(), productResponse2.description());
               assertEquals(product2.image(), productResponse2.image());
