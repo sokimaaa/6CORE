@@ -1,12 +1,12 @@
 package com._6core.platform.orderapp.service;
 
 import static org.mockito.Mockito.when;
+
 import com._6core.lib.java.domain.model.order.immutable.ImmutableOrderItemV01Impl;
 import com._6core.lib.java.domain.model.order.immutable.ImmutableOrderV01Impl;
 import com._6core.platform.orderapp.port.out.persistence.CreateOrderPort;
 import com._6core.platform.orderdomain.dto.OrderItemRequest;
 import com._6core.platform.orderdomain.dto.OrderRequest;
-import com._6core.platform.orderdomain.mapper.OrderMapper;
 import com._6core.platform.orderdomain.service.correctness.OrderItemsCorrect;
 import com._6core.platform.orderdomain.service.correctness.OrderTotalCorrect;
 import com._6core.platform.orderdomain.service.duplicate.OrderDuplicateContext;
@@ -15,8 +15,8 @@ import com._6core.platform.orderdomain.service.duplicate.StatusDuplicateStrategy
 import com._6core.platform.orderdomain.service.helper.OrderHelperService;
 import java.math.BigInteger;
 import java.util.Set;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -70,7 +70,7 @@ public class OrderCreateServiceTest {
             statusDuplicateStrategy,
             orderTotalCorrect,
             orderItemsCorrect,
-                createOrderPort);
+            createOrderPort);
   }
 
   @Test

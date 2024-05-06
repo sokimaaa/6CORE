@@ -5,8 +5,8 @@ import com._6core.platform.orderdomain.dto.OrderItemRequest;
 import com._6core.platform.orderdomain.dto.OrderRequest;
 import java.math.BigInteger;
 import java.util.Set;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class OrderMapperTest {
@@ -22,7 +22,6 @@ public class OrderMapperTest {
     Set<OrderItemRequest> orderItems = Set.of(item1, item2);
     request = new OrderRequest("order123", "pending", BigInteger.valueOf(250), orderItems);
   }
-
 
   @Test
   public void mapToOrderV01_complete() {

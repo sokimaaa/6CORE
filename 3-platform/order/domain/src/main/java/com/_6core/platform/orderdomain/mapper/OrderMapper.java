@@ -5,9 +5,7 @@ import com._6core.lib.java.domain.model.order.immutable.ImmutableOrderItemV01Imp
 import com._6core.lib.java.domain.model.order.immutable.ImmutableOrderV01Impl;
 import com._6core.platform.orderdomain.dto.OrderItemRequest;
 import com._6core.platform.orderdomain.dto.OrderRequest;
-
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import org.mapstruct.Mapper;
