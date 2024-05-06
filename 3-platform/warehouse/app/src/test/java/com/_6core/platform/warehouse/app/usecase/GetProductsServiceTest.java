@@ -22,10 +22,8 @@ import reactor.test.StepVerifier;
 
 @ExtendWith(MockitoExtension.class)
 class GetProductsServiceTest {
-  @Mock
-  private GetProductsPort getProductsPort;
-  @InjectMocks
-  private GetProductsService getProductsService;
+  @Mock private GetProductsPort getProductsPort;
+  @InjectMocks private GetProductsService getProductsService;
 
   @Test
   void getProductsByIds_fullProductsIds_valiedFluxProductV01() {
@@ -49,30 +47,30 @@ class GetProductsServiceTest {
             .category("Category 2")
             .build();
     when(getProductsPort.getProductsByIds(productIds)).thenReturn(Flux.just(product1, product2));
-        getProductsService
-             .getProductsByIds(productIds)
-             .log()
-             .as(StepVerifier::create)
-             .consumeNextWith(
-                  productV01 -> {
-                      assertEquals("1", product1.productId());
-                      assertEquals("Product 1", product1.name());
-                      assertEquals("Description 1", product1.description());
-                      assertEquals("image1.jpg", product1.image());
-                      assertEquals(BigInteger.valueOf(10), product1.price());
-                      assertEquals("Category 1", product1.category());
-                  })
-             .consumeNextWith(
-                  productV01 -> {
-                      assertEquals("2", product2.productId());
-                      assertEquals("Product 2", product2.name());
-                      assertEquals("Description 2", product2.description());
-                      assertEquals("image2.jpg", product2.image());
-                      assertEquals(BigInteger.valueOf(20), product2.price());
-                      assertEquals("Category 2", product2.category());
-                  })
-             .verifyComplete();
-    }
+    getProductsService
+        .getProductsByIds(productIds)
+        .log()
+        .as(StepVerifier::create)
+        .consumeNextWith(
+        productV01 -> {
+            assertEquals("1", product1.productId());
+            assertEquals("Product 1", product1.name());
+            assertEquals("Description 1", product1.description());
+            assertEquals("image1.jpg", product1.image());
+            assertEquals(BigInteger.valueOf(10), product1.price());
+            assertEquals("Category 1", product1.category());
+        })
+        .consumeNextWith(
+             productV01 -> {
+                 assertEquals("2", product2.productId());
+                 assertEquals("Product 2", product2.name());
+                 assertEquals("Description 2", product2.description());
+                 assertEquals("image2.jpg", product2.image());
+                 assertEquals(BigInteger.valueOf(20), product2.price());
+                 assertEquals("Category 2", product2.category());
+             })
+        .verifyComplete();
+  }
 
   @Test
   void getProductsByIds_nullProductsIds_valiedFluxProductV01() {
