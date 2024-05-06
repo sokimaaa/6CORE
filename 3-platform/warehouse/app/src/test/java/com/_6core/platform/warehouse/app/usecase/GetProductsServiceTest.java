@@ -71,7 +71,7 @@ class GetProductsServiceTest {
   }
 
   @Test
-  void getProductsByIds_nullProductsIds_valiedFluxProductV01() {
+  void getProductsByIds_emptyProductsIds_emptyFluxProductV01() {
     ProductsIds productIds = new ProductsIds(new ArrayList<>());
     when(getProductsPort.getProductsByIds(productIds)).thenReturn(Flux.empty());
     getProductsService.getProductsByIds(productIds).log().as(StepVerifier::create).verifyComplete();
