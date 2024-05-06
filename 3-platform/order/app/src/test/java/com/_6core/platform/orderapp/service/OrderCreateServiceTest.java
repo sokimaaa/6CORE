@@ -1,12 +1,14 @@
 package com._6core.platform.orderapp.service;
 
 import static org.mockito.Mockito.when;
-
 import com._6core.lib.java.domain.model.order.immutable.ImmutableOrderItemV01Impl;
 import com._6core.lib.java.domain.model.order.immutable.ImmutableOrderV01Impl;
-import com._6core.platform.orderapp.port.out.persistence.CreateOrderPort;
+import com._6core.platform.orderapp.port.out.persistence.CreateOrderPersistencePort;
 import com._6core.platform.orderdomain.dto.OrderItemRequest;
+import com._6core.platform.orderdomain.dto.OrderItemResponse;
 import com._6core.platform.orderdomain.dto.OrderRequest;
+import com._6core.platform.orderdomain.dto.OrderResponse;
+import com._6core.platform.orderdomain.mapper.OrderMapper;
 import com._6core.platform.orderdomain.service.correctness.OrderItemsCorrect;
 import com._6core.platform.orderdomain.service.correctness.OrderTotalCorrect;
 import com._6core.platform.orderdomain.service.duplicate.OrderDuplicateContext;
@@ -15,8 +17,8 @@ import com._6core.platform.orderdomain.service.duplicate.StatusDuplicateStrategy
 import com._6core.platform.orderdomain.service.helper.OrderHelperService;
 import java.math.BigInteger;
 import java.util.Set;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -33,12 +35,14 @@ public class OrderCreateServiceTest {
 
   @Mock private OrderItemsCorrect orderItemsCorrect;
 
-  @Mock private CreateOrderPort createOrderPort;
+  @Mock private CreateOrderPersistencePort createOrderPersistencePort;
 
   @Mock private OrderHelperService orderHelperService;
+  @Mock private OrderMapper mapper;
   @InjectMocks private OrderCreateService orderCreateService;
   private OrderRequest request;
   private ImmutableOrderV01Impl.Builder orderBuilder;
+  private OrderResponse response;
 
   @BeforeEach
   public void setup() {
@@ -46,8 +50,14 @@ public class OrderCreateServiceTest {
         new OrderItemRequest("item1", "2", 10, BigInteger.valueOf(100), "order123");
     OrderItemRequest item2 =
         new OrderItemRequest("item2", "1", 15, BigInteger.valueOf(150), "order123");
+    OrderItemResponse item3 =
+            new OrderItemResponse("item1", "2", 10, BigInteger.valueOf(100), "order123");
+    OrderItemResponse item4 =
+            new OrderItemResponse("item2", "1", 15, BigInteger.valueOf(150), "order123");
     Set<OrderItemRequest> orderItems = Set.of(item1, item2);
+    Set<OrderItemResponse> orderItemsResponse = Set.of(item3, item4);
     request = new OrderRequest("order123", "new", BigInteger.valueOf(250), orderItems);
+    response = new OrderResponse("order123", "new", BigInteger.valueOf(250), orderItemsResponse);
     orderBuilder = ImmutableOrderV01Impl.builder();
     orderBuilder.orderId(request.orderId());
     orderBuilder.status(request.status());
@@ -70,18 +80,20 @@ public class OrderCreateServiceTest {
             statusDuplicateStrategy,
             orderTotalCorrect,
             orderItemsCorrect,
-            createOrderPort);
+                createOrderPersistencePort,
+                mapper);
   }
 
   @Test
   public void createOrder_success() {
     ImmutableOrderV01Impl order = orderBuilder.build();
+    when(mapper.mapToResponseDto(order)).thenReturn(response);
     when(orderHelperService.getOrderById(request.orderId())).thenReturn(Mono.just(order));
     when(orderIdDuplicateStrategy.isDuplicate(request)).thenReturn(false);
     when(statusDuplicateStrategy.isDuplicate(request)).thenReturn(false);
     when(orderItemsCorrect.isCorrect(request)).thenReturn(true);
     when(orderTotalCorrect.isCorrect(request)).thenReturn(true);
-    when(createOrderPort.createOrder(request)).thenReturn(Mono.just(order));
+    when(createOrderPersistencePort.createOrder(request)).thenReturn(Mono.just(order));
 
     orderCreateService
         .createOrder(request)
@@ -89,10 +101,10 @@ public class OrderCreateServiceTest {
         .as(StepVerifier::create)
         .consumeNextWith(
             orderBuilder -> {
-              Assertions.assertEquals(request.orderId(), order.orderId());
-              Assertions.assertEquals(request.total(), order.total());
-              Assertions.assertNotNull(request.status(), order.status());
-              Assertions.assertEquals(request.orderItems().size(), order.orderItems().size());
+              Assertions.assertEquals(response.orderId(), order.orderId());
+              Assertions.assertEquals(response.total(), order.total());
+              Assertions.assertNotNull(response.status(), order.status());
+              Assertions.assertEquals(response.orderItems().size(), order.orderItems().size());
             })
         .verifyComplete();
   }
