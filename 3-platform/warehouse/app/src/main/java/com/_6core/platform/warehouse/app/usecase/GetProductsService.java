@@ -12,6 +12,7 @@ import reactor.core.publisher.Flux;
 public class GetProductsService implements GetProductsUseCase {
   private final GetProductsPort getProductsPort;
   private final ProductMapper productMapper;
+
   @Override
   public Flux<ProductResponse> getProductsByIds(ProductsIds productsIds) {
     return getProductsPort.getProductsByIds(productsIds).map(productMapper::mapToProductResponse);

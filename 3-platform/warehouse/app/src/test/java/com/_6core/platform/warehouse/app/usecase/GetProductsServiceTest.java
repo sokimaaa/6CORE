@@ -48,8 +48,12 @@ class GetProductsServiceTest {
             .category("Category 2")
             .build();
     when(getProductsPort.getProductsByIds(productIds)).thenReturn(Flux.just(product1, product2));
-    ProductResponse productResponse1 = new ProductResponse("Product 1", "Description 1", "image1.jpg", new BigInteger("10"), "Category 1");
-    ProductResponse productResponse2 = new ProductResponse("Product 2", "Description 2", "image2.jpg", new BigInteger("20"), "Category 2");
+    ProductResponse productResponse1 =
+        new ProductResponse(
+            "Product 1", "Description 1", "image1.jpg", new BigInteger("10"), "Category 1");
+    ProductResponse productResponse2 =
+        new ProductResponse(
+            "Product 2", "Description 2", "image2.jpg", new BigInteger("20"), "Category 2");
     when(productMapper.mapToProductResponse(product1)).thenReturn(productResponse1);
     when(productMapper.mapToProductResponse(product2)).thenReturn(productResponse2);
     getProductsService
@@ -64,13 +68,13 @@ class GetProductsServiceTest {
               assertEquals(product1.price(), productResponse1.price());
               assertEquals(product1.category(), productResponse1.category());
             })
-            .consumeNextWith(
-                productResponse -> {
-                  assertEquals(product2.name(), productResponse2.name());
-                  assertEquals(product2.description(), productResponse2.description());
-                  assertEquals(product2.image(), productResponse2.image());
-                  assertEquals(product2.price(), productResponse2.price());
-                  assertEquals(product2.category(), productResponse2.category());
+        .consumeNextWith(
+            productResponse -> {
+              assertEquals(product2.name(), productResponse2.name());
+              assertEquals(product2.description(), productResponse2.description());
+              assertEquals(product2.image(), productResponse2.image());
+              assertEquals(product2.price(), productResponse2.price());
+              assertEquals(product2.category(), productResponse2.category());
             })
         .verifyComplete();
   }
