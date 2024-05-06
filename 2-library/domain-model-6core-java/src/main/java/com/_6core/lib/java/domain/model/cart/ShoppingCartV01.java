@@ -1,6 +1,7 @@
 package com._6core.lib.java.domain.model.cart;
 
 import java.io.Serializable;
+import java.util.List;
 
 public interface ShoppingCartV01 extends Serializable {
     /**
