@@ -5,7 +5,9 @@ import static org.mockito.Mockito.when;
 
 import com._6core.lib.java.domain.model.warehouse.ProductV01;
 import com._6core.lib.java.domain.model.warehouse.immutable.ImmutableProductV01Impl;
+import com._6core.platform.warehouse.domain.dto.product.ProductResponse;
 import com._6core.platform.warehouse.domain.dto.product.ProductsIds;
+import com._6core.platform.warehouse.domain.mapper.ProductMapper;
 import com._6core.platform.warehouse.domain.persistance.out.GetProductsPort;
 import java.math.BigInteger;
 import java.util.ArrayList;
@@ -21,10 +23,11 @@ import reactor.test.StepVerifier;
 @ExtendWith(MockitoExtension.class)
 class GetProductsServiceTest {
   @Mock private GetProductsPort getProductsPort;
+  @Mock private ProductMapper productMapper;
   @InjectMocks private GetProductsService getProductsService;
 
   @Test
-  void getProductsByIds_fullProductsIds_valiedFluxProductV01() {
+  void getProductsByIds_fullProductsIds_valiedFluxProductResponse() {
     ProductsIds productIds = new ProductsIds(List.of("1", "2"));
     ProductV01 product1 =
         ImmutableProductV01Impl.builder()
@@ -45,33 +48,35 @@ class GetProductsServiceTest {
             .category("Category 2")
             .build();
     when(getProductsPort.getProductsByIds(productIds)).thenReturn(Flux.just(product1, product2));
+    ProductResponse productResponse1 = new ProductResponse("Product 1", "Description 1", "image1.jpg", new BigInteger("10"), "Category 1");
+    ProductResponse productResponse2 = new ProductResponse("Product 2", "Description 2", "image2.jpg", new BigInteger("20"), "Category 2");
+    when(productMapper.mapToProductResponse(product1)).thenReturn(productResponse1);
+    when(productMapper.mapToProductResponse(product2)).thenReturn(productResponse2);
     getProductsService
         .getProductsByIds(productIds)
         .log()
         .as(StepVerifier::create)
         .consumeNextWith(
-            productV01 -> {
-              assertEquals("1", product1.productId());
-              assertEquals("Product 1", product1.name());
-              assertEquals("Description 1", product1.description());
-              assertEquals("image1.jpg", product1.image());
-              assertEquals(BigInteger.valueOf(10), product1.price());
-              assertEquals("Category 1", product1.category());
+            productResponse -> {
+              assertEquals(product1.name(), productResponse1.name());
+              assertEquals(product1.description(), productResponse1.description());
+              assertEquals(product1.image(), productResponse1.image());
+              assertEquals(product1.price(), productResponse1.price());
+              assertEquals(product1.category(), productResponse1.category());
             })
-        .consumeNextWith(
-            productV01 -> {
-              assertEquals("2", product2.productId());
-              assertEquals("Product 2", product2.name());
-              assertEquals("Description 2", product2.description());
-              assertEquals("image2.jpg", product2.image());
-              assertEquals(BigInteger.valueOf(20), product2.price());
-              assertEquals("Category 2", product2.category());
+            .consumeNextWith(
+                productResponse -> {
+                  assertEquals(product2.name(), productResponse2.name());
+                  assertEquals(product2.description(), productResponse2.description());
+                  assertEquals(product2.image(), productResponse2.image());
+                  assertEquals(product2.price(), productResponse2.price());
+                  assertEquals(product2.category(), productResponse2.category());
             })
         .verifyComplete();
   }
 
   @Test
-  void getProductsByIds_emptyProductsIds_emptyFluxProductV01() {
+  void getProductsByIds_emptyProductsIds_emptyFluxProductResponse() {
     ProductsIds productIds = new ProductsIds(new ArrayList<>());
     when(getProductsPort.getProductsByIds(productIds)).thenReturn(Flux.empty());
     getProductsService.getProductsByIds(productIds).log().as(StepVerifier::create).verifyComplete();
