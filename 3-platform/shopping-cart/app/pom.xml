@@ -34,9 +34,5 @@
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
     </dependency>
-    <dependency>
-      <groupId>com.6core.lib</groupId>
-      <artifactId>reactive-postges-persistent</artifactId>
-    </dependency>
   </dependencies>
 </project>
