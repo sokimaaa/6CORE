@@ -13,13 +13,13 @@ import reactor.core.publisher.Flux;
 @Component
 @RequiredArgsConstructor
 public class GetProductsReactiveAdapter implements GetProductsPort {
-    private final ProductsReactiveRepository productsReactiveRepository;
-    private final ImmutableProduct2ProductEntity mapper = ImmutableProduct2ProductEntity.INSTANCE;
+  private final ProductsReactiveRepository productsReactiveRepository;
+  private final ImmutableProduct2ProductEntity mapper = ImmutableProduct2ProductEntity.INSTANCE;
 
-    @Override
-    public Flux<ProductV01> getProductsByIds(ProductsIds productsIds) {
-        Flux<ProductEntity> productsByIds
-                = productsReactiveRepository.getProductsByIds(productsIds.productsIds());
-        return productsByIds.map(mapper::map2Domain);
-    }
+  @Override
+  public Flux<ProductV01> getProductsByIds(ProductsIds productsIds) {
+    Flux<ProductEntity> productsByIds =
+        productsReactiveRepository.getProductsByIds(productsIds.productsIds());
+    return productsByIds.map(mapper::map2Domain);
+  }
 }
