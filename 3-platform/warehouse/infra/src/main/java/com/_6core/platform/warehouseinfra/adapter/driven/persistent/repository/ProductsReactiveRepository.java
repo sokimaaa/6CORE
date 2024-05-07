@@ -7,7 +7,6 @@ import org.springframework.data.r2dbc.repository.R2dbcRepository;
 import org.springframework.stereotype.Repository;
 import reactor.core.publisher.Flux;
 
-@Repository
 public interface ProductsReactiveRepository extends R2dbcRepository<ProductEntity, String> {
 
   @Query("SELECT p FROM ProductEntity p WHERE p.id IN (:ids)")
