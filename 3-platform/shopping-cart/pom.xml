@@ -22,11 +22,11 @@
   </modules>
 
   <dependencies>
-    <dependency>
-      <groupId>com._6core.lib.java</groupId>
-      <artifactId>reactive-postges-persistent</artifactId>
-      <version>${project.parent.version}</version>
-    </dependency>
+    <!--    <dependency>-->
+    <!--      <groupId>com._6core.lib.java</groupId>-->
+    <!--      <artifactId>reactive-postges-persistent</artifactId>-->
+    <!--      <version>${project.parent.version}</version>-->
+    <!--    </dependency>-->
 
     <dependency>
       <groupId>org.projectlombok</groupId>
