@@ -1,4 +1,4 @@
-package com._6core.platform.warehouseinfra.adapter.driven.persistence.entity;
+package com._6core.platform.warehouseinfra.adapter.driven.persistent.entity;
 
 import java.math.BigDecimal;
 import lombok.Getter;

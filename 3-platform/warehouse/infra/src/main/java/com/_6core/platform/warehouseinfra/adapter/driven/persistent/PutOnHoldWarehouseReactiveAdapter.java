@@ -1,8 +1,8 @@
-package com._6core.platform.warehouseinfra.adapter.persistent;
+package com._6core.platform.warehouseinfra.adapter.driven.persistent;
 
 import com._6core.lib.java.domain.model.warehouse.InventoryV01;
 import com._6core.platform.warehouse.domain.persistance.out.InventoryPersistentPort;
-import com._6core.platform.warehouseinfra.adapter.persistent.repository.InventoryReactiveRepository;
+import com._6core.platform.warehouseinfra.adapter.driven.persistent.repository.InventoryReactiveRepository;
 import com._6core.platform.warehouseinfra.mapper.ImmutableInventory2InventoryEntity;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;

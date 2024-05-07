@@ -1,6 +1,6 @@
-package com._6core.platform.warehouseinfra.adapter.persistent.repository;
+package com._6core.platform.warehouseinfra.adapter.driven.persistent.repository;
 
-import com._6core.platform.warehouseinfra.adapter.driven.persistence.entity.InventoryEntity;
+import com._6core.platform.warehouseinfra.adapter.driven.persistent.entity.InventoryEntity;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.r2dbc.repository.R2dbcRepository;
 import reactor.core.publisher.Mono;
