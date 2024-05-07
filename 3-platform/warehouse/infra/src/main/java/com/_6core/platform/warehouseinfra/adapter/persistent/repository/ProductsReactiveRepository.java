@@ -1,6 +1,6 @@
 package com._6core.platform.warehouseinfra.adapter.persistent.repository;
 
-import com._6core.platform.warehouseinfra.adapter.driven.driven.persistence.entity.ProductEntity;
+import com._6core.platform.warehouseinfra.adapter.driven.persistence.entity.ProductEntity;
 import java.util.List;
 import org.springframework.data.r2dbc.repository.Query;
 import org.springframework.data.r2dbc.repository.R2dbcRepository;
