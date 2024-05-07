@@ -2,7 +2,7 @@ package com._6core.platform.warehouseinfra.mapper;
 
 import com._6core.lib.java.domain.model.warehouse.InventoryV01;
 import com._6core.lib.java.domain.model.warehouse.immutable.ImmutableInventoryV01Impl;
-import com._6core.platform.warehouseinfra.adapter.driven.persistent.entity.InventoryEntity;
+import com._6core.platform.warehouseinfra.adapter.driven.driven.persistence.entity.InventoryEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;

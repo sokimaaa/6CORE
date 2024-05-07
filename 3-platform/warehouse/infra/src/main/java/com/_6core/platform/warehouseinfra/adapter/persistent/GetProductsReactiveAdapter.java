@@ -1,10 +1,10 @@
-package com._6core.platform.warehouseinfra.adapter.driven.persistent;
+package com._6core.platform.warehouseinfra.adapter.persistent;
 
 import com._6core.lib.java.domain.model.warehouse.ProductV01;
 import com._6core.platform.warehouse.domain.dto.product.ProductsIds;
 import com._6core.platform.warehouse.domain.persistance.out.GetProductsPort;
-import com._6core.platform.warehouseinfra.adapter.driven.persistent.entity.ProductEntity;
-import com._6core.platform.warehouseinfra.adapter.driven.persistent.repository.ProductsReactiveRepository;
+import com._6core.platform.warehouseinfra.adapter.driven.driven.persistence.entity.ProductEntity;
+import com._6core.platform.warehouseinfra.adapter.persistent.repository.ProductsReactiveRepository;
 import com._6core.platform.warehouseinfra.mapper.ImmutableProduct2ProductEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
