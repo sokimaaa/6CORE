@@ -27,8 +27,8 @@
       <scope>test</scope>
     </dependency>
     <dependency>
-    	<groupId>com.6core.lib</groupId>
-    	<artifactId>java-domain-model</artifactId>
+      <groupId>com.6core.lib</groupId>
+      <artifactId>java-domain-model</artifactId>
     </dependency>
   </dependencies>
   <build>

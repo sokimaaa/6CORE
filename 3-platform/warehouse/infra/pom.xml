@@ -28,11 +28,11 @@
       <groupId>org.mapstruct</groupId>
       <artifactId>mapstruct</artifactId>
       <version>1.5.5.Final</version>
-	</dependency>
+    </dependency>
     <dependency>
-    	<groupId>com.6core.platform</groupId>
-    	<artifactId>warehouse-domain</artifactId>
-    	<version>0.0.1-SNAPSHOT</version>
+      <groupId>com.6core.platform</groupId>
+      <artifactId>warehouse-domain</artifactId>
+      <version>0.0.1-SNAPSHOT</version>
     </dependency>
   </dependencies>
 
