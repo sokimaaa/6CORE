@@ -6,9 +6,7 @@ import reactor.core.publisher.Mono;
 
 @PortOut
 public interface InventoryPersistentPort {
-    Mono<InventoryV01Impl> findByProductId(String productId);
+  Mono<InventoryV01Impl> findByProductId(String productId);
 
-    Mono<InventoryV01Impl> update(InventoryV01Impl inventory);
-
-
+  Mono<InventoryV01Impl> update(InventoryV01Impl inventory);
 }

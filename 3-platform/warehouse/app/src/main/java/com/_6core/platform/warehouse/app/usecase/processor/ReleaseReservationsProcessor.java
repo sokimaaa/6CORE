@@ -6,10 +6,10 @@ import org.springframework.scheduling.annotation.Scheduled;
 
 @RequiredArgsConstructor
 public class ReleaseReservationsProcessor {
-    private final PutOnHoldService putOnHoldService;
+  private final PutOnHoldService putOnHoldService;
 
-    @Scheduled(cron = "0 * * * * *")
-    void execute() {
-        putOnHoldService.releaseReservations();
-    }
+  @Scheduled(cron = "0 * * * * *")
+  void execute() {
+    putOnHoldService.releaseReservations();
+  }
 }

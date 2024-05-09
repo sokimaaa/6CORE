@@ -8,8 +8,7 @@ import reactor.core.publisher.Mono;
 
 @PortOut
 public interface ReservationPersistentPort {
-    Mono<ReservationResponse> save(ReservationRequest request);
+  Mono<ReservationResponse> save(ReservationRequest request);
 
-    Flux<ReservationResponse> getReservationsForRelease();
+  Flux<ReservationResponse> getReservationsForRelease();
 }
-

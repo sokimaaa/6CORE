@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class PutOnHoldResponse {
-    private String productId;
-    private Integer quantity;
-    private Boolean result;
+  private String productId;
+  private Integer quantity;
+  private Boolean result;
 }
