@@ -50,7 +50,7 @@ class ReservationPersistentTest {
   }
 
   @Test
-  void getReservationsForRelease() throws Exception {
+  void getReservationsForRelease_validStoredData_validReservationResponse() {
     // Given
     ReservationRequest requestWithPastDate = new ReservationRequest();
     requestWithPastDate.setProductId("1");
@@ -58,21 +58,27 @@ class ReservationPersistentTest {
     requestWithPastDate.setReservedTo(LocalDateTime.now().minusHours(1));
 
     ReservationRequest requestWithFutureDate = new ReservationRequest();
-    requestWithFutureDate.setProductId("1");
+    requestWithFutureDate.setProductId("2");
     requestWithFutureDate.setQuantity(3);
     requestWithFutureDate.setReservedTo(LocalDateTime.now().plusHours(2));
 
     ReservationRecord recordWithPastDate = getRecordByReservationRequest(requestWithPastDate);
+    ReservationRecord recordWithFutureDate = getRecordByReservationRequest(requestWithFutureDate);
 
     ReservationResponse reservationResponseWithPastDate = getResponseByRecord(recordWithPastDate);
+    ReservationResponse reservationResponseWithFutureDate =
+        getResponseByRecord(recordWithFutureDate);
 
+    Mockito.when(reservationMapper.toRecord(requestWithPastDate)).thenReturn(recordWithPastDate);
+    Mockito.when(reservationMapper.toRecord(requestWithFutureDate))
+        .thenReturn(recordWithFutureDate);
     Mockito.when(reservationMapper.toResponse(recordWithPastDate))
         .thenReturn(reservationResponseWithPastDate);
+    Mockito.when(reservationMapper.toResponse(recordWithFutureDate))
+        .thenReturn(reservationResponseWithFutureDate);
 
-    reservationPersistent
-        .save(requestWithPastDate)
-        .zipWith(reservationPersistent.save(requestWithFutureDate))
-        .block();
+    reservationPersistent.save(requestWithPastDate).block();
+    reservationPersistent.save(requestWithFutureDate).block();
 
     // When
 
@@ -89,7 +95,6 @@ class ReservationPersistentTest {
                   reservationResponseWithPastDate.getReservedTo(),
                   putOnHoldResponse.getReservedTo());
             })
-        .expectNextCount(1)
         .verifyComplete();
   }
 
