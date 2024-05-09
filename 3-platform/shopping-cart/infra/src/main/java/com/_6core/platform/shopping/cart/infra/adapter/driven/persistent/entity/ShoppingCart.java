@@ -1,4 +1,4 @@
-package com._6core.platform.shopping.cart.infra.model;
+package com._6core.platform.shopping.cart.infra.adapter.driven.persistent.entity;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
