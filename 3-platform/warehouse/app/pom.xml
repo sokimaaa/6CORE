@@ -45,5 +45,9 @@
       <artifactId>mockito-junit-jupiter</artifactId>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>com.6core.lib</groupId>
+      <artifactId>hexagonal-annotations</artifactId>
+    </dependency>
   </dependencies>
 </project>
