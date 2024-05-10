@@ -20,7 +20,7 @@
     <dependency>
       <groupId>com.6core.lib</groupId>
       <artifactId>reactive-postges-persistent</artifactId>
-      <!--      <version>${project.parent.version}</version>-->
+            <version>${project.parent.version}</version>
     </dependency>
 
     <dependency>
