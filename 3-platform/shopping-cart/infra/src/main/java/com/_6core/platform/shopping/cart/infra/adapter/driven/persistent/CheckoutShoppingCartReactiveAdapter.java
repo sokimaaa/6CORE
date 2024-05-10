@@ -13,19 +13,17 @@ import reactor.core.publisher.Mono;
 @Component
 @RequiredArgsConstructor
 public class CheckoutShoppingCartReactiveAdapter implements CheckoutShoppingCartPort {
-    private final CheckoutShoppingCartReactiveRepository repository;
-    private final ImmutableShoppingCart2ShoppingCartEntity mapper =
-            ImmutableShoppingCart2ShoppingCartEntity.INSTANCE;
+  private final CheckoutShoppingCartReactiveRepository repository;
+  private final ImmutableShoppingCart2ShoppingCartEntity mapper =
+      ImmutableShoppingCart2ShoppingCartEntity.INSTANCE;
 
-    @Override
-    public Mono<ShoppingCartV01Impl> get(CartId cartId) {
-        return repository.findByCartId(cartId)
-                .map(mapper::map2Domain);
-    }
+  @Override
+  public Mono<ShoppingCartV01Impl> get(CartId cartId) {
+    return repository.findByCartId(cartId).map(mapper::map2Domain);
+  }
 
-    @Override
-    public Mono<EmptyCartResponse> clean(CartId cartId) {
-        return repository.clean(cartId)
-                .then(Mono.fromCallable(EmptyCartResponse::new));
-    }
+  @Override
+  public Mono<EmptyCartResponse> clean(CartId cartId) {
+    return repository.clean(cartId).then(Mono.fromCallable(EmptyCartResponse::new));
+  }
 }

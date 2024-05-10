@@ -9,12 +9,12 @@ import org.mapstruct.factory.Mappers;
 
 @Mapper
 public interface ImmutableShoppingCart2ShoppingCartEntity {
-    ImmutableShoppingCart2ShoppingCartEntity INSTANCE =
-            Mappers.getMapper(ImmutableShoppingCart2ShoppingCartEntity.class);
+  ImmutableShoppingCart2ShoppingCartEntity INSTANCE =
+      Mappers.getMapper(ImmutableShoppingCart2ShoppingCartEntity.class);
 
-    @Mapping(target = "cartId", source = "id")
-    ImmutableShoppingCartV01Impl map2Domain(ShoppingCart entity);
+  @Mapping(target = "cartId", source = "id")
+  ImmutableShoppingCartV01Impl map2Domain(ShoppingCart entity);
 
-    @Mapping(target = "id", source = "cartId")
-    ShoppingCart map2Entity(ShoppingCartV01 shoppingCartV01);
+  @Mapping(target = "id", source = "cartId")
+  ShoppingCart map2Entity(ShoppingCartV01 shoppingCartV01);
 }
